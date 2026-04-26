@@ -8,6 +8,7 @@ import RoleHome from "@/components/cabinet/RoleHome";
 import CreateProjectModal from "@/components/cabinet/CreateProjectModal";
 import AnimatedBackground from "@/components/cabinet/AnimatedBackground";
 import VersionBadge from "@/components/cabinet/VersionBadge";
+import AccessManagement from "@/components/cabinet/AccessManagement";
 import { navItems, Section } from "@/components/cabinet/constants";
 import { Role } from "@/components/cabinet/roles";
 
@@ -69,6 +70,8 @@ export default function Index() {
         <main className="flex-1 overflow-y-auto p-6">
           {allowed === "dashboard" ? (
             <RoleHome role={role} />
+          ) : allowed === "access" ? (
+            <AccessManagement />
           ) : (
             <>
               <DashboardSections active={allowed} setActive={setActive} />

@@ -6,7 +6,8 @@ export type Section =
   | "finances"
   | "documents"
   | "calendar"
-  | "analytics";
+  | "analytics"
+  | "access";
 
 export const navItems: { id: Section; label: string; icon: string; badge?: number }[] = [
   { id: "dashboard", label: "Главная", icon: "LayoutDashboard" },
@@ -17,6 +18,7 @@ export const navItems: { id: Section; label: string; icon: string; badge?: numbe
   { id: "documents", label: "Документы", icon: "FolderOpen" },
   { id: "calendar", label: "Календарь", icon: "Calendar" },
   { id: "analytics", label: "Аналитика", icon: "BarChart3" },
+  { id: "access", label: "Доступы", icon: "KeyRound" },
 ];
 
 export const projects = [

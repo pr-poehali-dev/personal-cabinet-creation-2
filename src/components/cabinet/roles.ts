@@ -35,13 +35,14 @@ export const roles: Role[] = [
     icon: "HardHat",
     color: "#1E3A8A",
     description: "Полный доступ ко всем разделам, управление командой и бюджетом",
-    sections: ["dashboard", "projects", "tasks", "team", "finances", "documents", "calendar", "analytics"],
+    sections: ["dashboard", "projects", "tasks", "team", "finances", "documents", "calendar", "analytics", "access"],
     features: [
       "Создание и редактирование проектов",
       "Назначение задач команде",
       "Утверждение смет и актов",
       "Контроль сроков и бюджета",
       "Подписание исполнительной документации",
+      "Управление доступами и паролями ролей",
     ],
   },
   {

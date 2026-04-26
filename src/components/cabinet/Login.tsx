@@ -23,11 +23,15 @@ export default function Login({ onLogin }: LoginProps) {
     }
   };
 
-  const quickLogin = (r: Role) => {
+  const selectRole = (r: Role) => {
     setLoginId(r.loginId);
-    setPassword(r.password);
+    setPassword("");
     setError("");
-    setTimeout(() => onLogin(r), 100);
+    // Фокус на поле пароля
+    setTimeout(() => {
+      const passField = document.querySelector<HTMLInputElement>('input[type="password"]');
+      passField?.focus();
+    }, 50);
   };
 
   return (
@@ -99,7 +103,9 @@ export default function Login({ onLogin }: LoginProps) {
           </div>
 
           <h1 className="font-oswald text-white text-2xl font-bold mb-2 text-center">Вход в систему</h1>
-          <p className="text-gray-400 text-sm mb-6 text-center">Используйте свой персональный ID для входа</p>
+          <p className="text-gray-400 text-sm mb-6 text-center">
+            Выберите роль справа — ID подставится. Пароль выдаётся администратором при подписании документов.
+          </p>
 
           <style>{`
             .logo-outline-glow::before {
@@ -187,7 +193,7 @@ export default function Login({ onLogin }: LoginProps) {
             {roles.map((r) => (
               <button
                 key={r.id}
-                onClick={() => quickLogin(r)}
+                onClick={() => selectRole(r)}
                 className="role-card relative bg-[#111111]/90 backdrop-blur rounded-2xl p-5 text-left transition-all duration-300 hover:-translate-y-1 group overflow-hidden"
               >
                 <div className="relative z-10 flex items-center gap-3 mb-3">
