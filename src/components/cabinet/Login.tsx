@@ -44,6 +44,23 @@ export default function Login({ onLogin }: LoginProps) {
     >
       {/* Жёлтая декоративная полоса слева — брендовый акцент */}
       <div className="absolute top-0 left-0 w-1.5 h-full bg-gs-yellow z-20" />
+
+      {/* Фоновый постер «Будущее строится сегодня» с лёгким неоном (как в брендбуке) */}
+      <div className="poster-bg pointer-events-none">
+        <div className="poster-line poster-line-1">БУДУЩЕЕ</div>
+        <div className="poster-line poster-line-2">СТРОИТСЯ</div>
+        <div className="poster-line poster-line-3">СЕГОДНЯ</div>
+        <div className="poster-tag">ключевое сообщение бренда</div>
+      </div>
+
+      {/* Декоративная диагональная сетка как в брендбуке */}
+      <div
+        className="absolute inset-0 opacity-[0.04] pointer-events-none"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(45deg, #FCDD2B 0px, #FCDD2B 1px, transparent 1px, transparent 14px)",
+        }}
+      />
       <style>{`
         .neon-slogan {
           color: #FCDD2B;
@@ -62,16 +79,128 @@ export default function Login({ onLogin }: LoginProps) {
         @keyframes wordFadeIn {
           to { opacity: 1; transform: translateY(0); }
         }
+
+        /* Фоновый постер «Будущее строится сегодня» */
+        .poster-bg {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          z-index: 0;
+          opacity: 0.07;
+        }
+        .poster-line {
+          font-family: 'Inter', sans-serif;
+          font-weight: 900;
+          font-size: clamp(60px, 14vw, 200px);
+          line-height: 0.9;
+          letter-spacing: -0.04em;
+          color: #FCDD2B;
+          text-shadow:
+            0 0 20px rgba(252, 221, 43, 0.6),
+            0 0 40px rgba(247, 125, 0, 0.4);
+          animation: posterPulse 6s ease-in-out infinite;
+        }
+        .poster-line-2 { color: #fff; animation-delay: 2s; }
+        .poster-line-3 { color: #F77D00; animation-delay: 4s; }
+        .poster-tag {
+          margin-top: 1rem;
+          font-size: 14px;
+          letter-spacing: 0.4em;
+          text-transform: uppercase;
+          color: #FCDD2B;
+          opacity: 0.6;
+        }
+        @keyframes posterPulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.7; }
+        }
+
+        /* Неоновая бегущая обводка карточек ролей */
+        .role-card {
+          isolation: isolate;
+          background: rgba(255, 255, 255, 0.85) !important;
+          backdrop-filter: blur(8px);
+        }
+        .role-card::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          border-radius: 1rem;
+          padding: 1.5px;
+          background: conic-gradient(
+            from var(--gs-angle, 0deg),
+            transparent 0%,
+            #FCDD2B 20%,
+            #F77D00 35%,
+            #fff 50%,
+            #FCDD2B 65%,
+            transparent 80%
+          );
+          -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          animation: borderRotate 4s linear infinite;
+          opacity: 0.7;
+          pointer-events: none;
+          transition: opacity 0.3s ease;
+        }
+        .role-card:hover::before {
+          opacity: 1;
+        }
+        .role-card:hover {
+          box-shadow:
+            0 0 24px rgba(252, 221, 43, 0.45),
+            0 0 48px rgba(247, 125, 0, 0.3);
+        }
+
+        /* Неоновая обводка карточки формы входа */
+        .login-card {
+          isolation: isolate;
+        }
+        .login-card::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          border-radius: 1.5rem;
+          padding: 2px;
+          background: conic-gradient(
+            from var(--gs-angle, 0deg),
+            transparent 0%,
+            #FCDD2B 25%,
+            #F77D00 50%,
+            #FCDD2B 75%,
+            transparent 100%
+          );
+          -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          animation: borderRotate 6s linear infinite;
+          pointer-events: none;
+        }
+        .login-card::after {
+          content: "";
+          position: absolute;
+          inset: -3px;
+          border-radius: 1.5rem;
+          box-shadow: 0 0 30px rgba(252, 221, 43, 0.25);
+          pointer-events: none;
+          z-index: -1;
+        }
       `}</style>
 
       {/* Центрированная форма входа */}
       <div className="relative z-10 w-full max-w-7xl grid lg:grid-cols-[1fr_1.1fr] gap-10 items-center justify-items-center mx-auto">
         {/* Left - login form */}
-        <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden">
+        <div className="login-card relative bg-white/85 backdrop-blur-md rounded-3xl shadow-2xl w-full max-w-md overflow-hidden">
           {/* Шапка с фирменным градиентом */}
           <div
             className="px-8 pt-8 pb-7 relative"
-            style={{ background: "linear-gradient(135deg, #6B7C90 0%, #1A2D4D 100%)" }}
+            style={{ background: "linear-gradient(135deg, rgba(107,124,144,0.92) 0%, rgba(26,45,77,0.95) 100%)" }}
           >
             {/* Жёлтый акцент */}
             <div className="absolute top-0 right-0 w-24 h-1.5 bg-gs-yellow" />
@@ -80,12 +209,12 @@ export default function Login({ onLogin }: LoginProps) {
               <div className="bg-white rounded-2xl p-3 mb-4 shadow-lg">
                 <img
                   src="https://cdn.poehali.dev/projects/13dba3bf-6323-4724-9f70-0455e15a1ea0/bucket/e86a33ff-bcc0-41ee-ad09-efce63f6f6e6.png"
-                  alt="ГлобалСтрой"
+                  alt="ГЛОБАЛСТ"
                   className="w-24 h-24 object-contain"
                 />
               </div>
               <div className="text-center">
-                <div className="font-inter text-white text-2xl font-extrabold tracking-tight leading-none">ГЛОБАЛСТРОЙ</div>
+                <div className="font-inter text-white text-3xl font-extrabold tracking-[0.05em] leading-none">ГЛОБАЛСТ</div>
                 <div className="text-gs-yellow text-[10px] tracking-[0.25em] uppercase mt-2 font-semibold">Уральская строительная компания</div>
               </div>
             </div>
@@ -134,10 +263,9 @@ export default function Login({ onLogin }: LoginProps) {
               )}
               <button
                 type="submit"
-                className="w-full py-3 text-white font-bold rounded-lg transition-all duration-200 flex items-center justify-center gap-2 hover:scale-[1.01] active:scale-[0.99] shadow-md hover:shadow-lg"
+                className="w-full py-3 text-white font-bold rounded-lg transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] shadow-md hover:shadow-lg tracking-[0.15em]"
                 style={{ background: "linear-gradient(135deg, #6B7C90 0%, #1A2D4D 100%)" }}
               >
-                <Icon name="LogIn" size={18} />
                 ВОЙТИ В КАБИНЕТ
               </button>
             </form>
@@ -160,7 +288,7 @@ export default function Login({ onLogin }: LoginProps) {
               <button
                 key={r.id}
                 onClick={() => selectRole(r)}
-                className="role-card group relative bg-white rounded-2xl p-4 text-left transition-all duration-300 hover:-translate-y-1 overflow-hidden shadow-md hover:shadow-xl"
+                className="role-card group relative rounded-2xl p-4 text-left transition-all duration-300 hover:-translate-y-1 overflow-hidden shadow-md hover:shadow-xl"
               >
                 {/* Жёлтая полоска сверху-слева — фирменный акцент */}
                 <div className="absolute top-0 left-0 w-12 h-1 bg-gs-yellow group-hover:w-full transition-all duration-500" />
