@@ -49,6 +49,12 @@ const roleStats: Record<string, { label: string; value: string; sub: string; ico
     { label: "Проверок", value: "4", sub: "на этой неделе", icon: "ShieldCheck" },
     { label: "Журнал записей", value: "186", sub: "с начала", icon: "BookOpen" },
   ],
+  legal: [
+    { label: "Договоров на проверке", value: "12", sub: "5 срочных", icon: "FileSignature" },
+    { label: "Активных дел", value: "3", sub: "1 в суде", icon: "Scale" },
+    { label: "Согласовано", value: "47", sub: "за месяц", icon: "FileCheck" },
+    { label: "Претензий", value: "2", sub: "входящих", icon: "AlertTriangle" },
+  ],
 };
 
 export default function RoleHome({ role }: Props) {

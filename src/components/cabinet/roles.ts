@@ -7,7 +7,8 @@ export type RoleId =
   | "customer"
   | "agency"
   | "contractor"
-  | "control";
+  | "control"
+  | "legal";
 
 export interface Role {
   id: RoleId;
@@ -149,6 +150,25 @@ export const roles: Role[] = [
       "Акты скрытых работ",
       "Реестр замечаний",
       "Проверки качества и фотофиксация",
+    ],
+  },
+  {
+    id: "legal",
+    loginId: "legal-001",
+    password: "8888",
+    name: "Юридический отдел",
+    fullName: "Юридический отдел",
+    shortName: "ЮР",
+    icon: "Scale",
+    color: "#A855F7",
+    description: "Договоры, претензии, согласования и правовая защита проектов",
+    sections: ["dashboard", "projects", "documents", "calendar", "analytics"],
+    features: [
+      "Реестр и проверка договоров",
+      "Согласование с контрагентами",
+      "Претензионная работа и иски",
+      "Согласование разрешительной документации",
+      "Реестр доверенностей и НПА",
     ],
   },
 ];

@@ -95,11 +95,11 @@ export default function Sidebar({ active, setActive, sidebarOpen, setSidebarOpen
             <div className="text-[10px] text-gray-500 leading-snug font-mono">
               <div className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-gray-400 font-semibold">v1.7</span>
+                <span className="text-gray-400 font-semibold">v1.8</span>
               </div>
               <div className="text-gray-600 mt-1 leading-tight">
-                Логотип + 3D-иконки<br/>
-                цветовое разделение
+                Добавлена роль<br/>
+                Юридический отдел
               </div>
             </div>
           </div>
