@@ -26,9 +26,9 @@ export default {
 			colors: {
 				'build-orange': '#1E3A8A',
 				'build-yellow': '#3B5FBF',
-				'build-dark': '#02060F',
-				'build-card': '#070D1E',
-				'build-border': '#152744',
+				'build-dark': '#0A1628',
+				'build-card': '#0F1F3D',
+				'build-border': '#1E3559',
 				'gs-navy': '#0B1E3F',
 				'gs-blue': '#1E3A8A',
 				'gs-accent': '#3B5FBF',

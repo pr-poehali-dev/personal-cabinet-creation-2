@@ -39,7 +39,7 @@ export default function Index() {
       />
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden relative z-10">
-        <header className="bg-[#070D1E]/80 backdrop-blur-md border-b border-build-border px-6 py-4 flex items-center gap-4 shrink-0">
+        <header className="bg-[#0F1F3D]/80 backdrop-blur-md border-b border-build-border px-6 py-4 flex items-center gap-4 shrink-0">
           <button className="lg:hidden text-gray-400 hover:text-white" onClick={() => setSidebarOpen(true)}>
             <Icon name="Menu" size={22} />
           </button>

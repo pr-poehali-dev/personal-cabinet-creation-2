@@ -4,21 +4,12 @@ const LOGO_URL =
 export default function AnimatedBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Глубокий тёмный градиент — ночь / hi-tech */}
+      {/* Базовый синий градиент */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse at top left, #1E3A8A30 0%, transparent 55%), radial-gradient(ellipse at bottom right, #3B5FBF20 0%, transparent 55%), linear-gradient(135deg, #02060F 0%, #050B1C 50%, #02060F 100%)",
-        }}
-      />
-
-      {/* Виньетка по краям для глубины */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.85) 100%)",
+            "radial-gradient(ellipse at top left, #1E3A8A40 0%, transparent 50%), radial-gradient(ellipse at bottom right, #3B5FBF30 0%, transparent 50%), linear-gradient(135deg, #0A1628 0%, #0B1E3F 50%, #0A1628 100%)",
         }}
       />
 

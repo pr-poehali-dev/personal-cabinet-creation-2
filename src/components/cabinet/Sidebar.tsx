@@ -17,7 +17,7 @@ export default function Sidebar({ active, setActive, sidebarOpen, setSidebarOpen
   return (
     <>
       <aside
-        className={`fixed lg:static z-40 h-full w-64 bg-[#070D1E]/85 backdrop-blur-md border-r border-build-border flex flex-col transition-transform duration-300 ${
+        className={`fixed lg:static z-40 h-full w-64 bg-[#0B1E3F]/85 backdrop-blur-md border-r border-build-border flex flex-col transition-transform duration-300 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
