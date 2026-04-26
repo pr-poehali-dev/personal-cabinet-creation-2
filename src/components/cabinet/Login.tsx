@@ -45,7 +45,7 @@ export default function Login({ onLogin }: LoginProps) {
       {/* Жёлтая декоративная полоса слева — брендовый акцент */}
       <div className="absolute top-0 left-0 w-1.5 h-full bg-gs-yellow z-20" />
 
-      {/* Усиленный фоновый логотип */}
+      {/* Усиленный фоновый логотип + парящие частицы */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
         {/* Светящееся пятно за логотипом */}
         <div
@@ -56,6 +56,19 @@ export default function Login({ onLogin }: LoginProps) {
             filter: "blur(40px)",
           }}
         />
+
+        {/* Парящие частицы — звёздная пыль */}
+        <div className="particles-orbit">
+          {Array.from({ length: 50 }).map((_, i) => (
+            <span key={i} className={`dust dust-${(i % 10) + 1}`} />
+          ))}
+        </div>
+
+        {/* Орбитальные круги вокруг логотипа */}
+        <div className="orbit orbit-1" />
+        <div className="orbit orbit-2" />
+        <div className="orbit orbit-3" />
+
         <img
           src="https://cdn.poehali.dev/projects/13dba3bf-6323-4724-9f70-0455e15a1ea0/bucket/e86a33ff-bcc0-41ee-ad09-efce63f6f6e6.png"
           alt=""
@@ -73,6 +86,86 @@ export default function Login({ onLogin }: LoginProps) {
           0%, 100% { opacity: 0.15; transform: scale(1); }
           50% { opacity: 0.22; transform: scale(1.03); }
         }
+
+        /* Орбитальные круги */
+        .orbit {
+          position: absolute;
+          border-radius: 50%;
+          border: 1px dashed rgba(147, 197, 253, 0.15);
+          animation: orbitSpin 60s linear infinite;
+        }
+        .orbit-1 { width: 50vw; height: 50vw; max-width: 600px; max-height: 600px; }
+        .orbit-2 {
+          width: 65vw; height: 65vw; max-width: 750px; max-height: 750px;
+          animation-duration: 90s; animation-direction: reverse;
+          border-color: rgba(96, 165, 250, 0.12);
+        }
+        .orbit-3 {
+          width: 85vw; height: 85vw; max-width: 950px; max-height: 950px;
+          animation-duration: 120s;
+          border-color: rgba(59, 130, 246, 0.08);
+        }
+        @keyframes orbitSpin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+
+        /* Звёздная пыль вокруг логотипа */
+        .particles-orbit {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .dust {
+          position: absolute;
+          width: 3px;
+          height: 3px;
+          border-radius: 50%;
+          background: #93c5fd;
+          box-shadow:
+            0 0 4px #93c5fd,
+            0 0 8px rgba(147, 197, 253, 0.6),
+            0 0 14px rgba(59, 130, 246, 0.4);
+          animation: dustFloat 12s ease-in-out infinite, dustTwinkle 3s ease-in-out infinite;
+          opacity: 0;
+        }
+        @keyframes dustFloat {
+          0%   { transform: translate(0, 0) scale(1); }
+          25%  { transform: translate(40px, -30px) scale(1.4); }
+          50%  { transform: translate(-20px, -60px) scale(0.8); }
+          75%  { transform: translate(-50px, -20px) scale(1.2); }
+          100% { transform: translate(0, 0) scale(1); }
+        }
+        @keyframes dustTwinkle {
+          0%, 100% { opacity: 0.3; }
+          50%      { opacity: 1; }
+        }
+
+        /* Раскидаем частицы по сцене разными размерами */
+        ${Array.from({ length: 50 })
+          .map((_, i) => {
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            const size = Math.random() * 3 + 1.5;
+            const delay = Math.random() * 12;
+            const duration = Math.random() * 8 + 8;
+            const hue = Math.random() > 0.5 ? "#93c5fd" : Math.random() > 0.5 ? "#60a5fa" : "#FCDD2B";
+            return `
+              .particles-orbit > .dust:nth-child(${i + 1}) {
+                left: ${left}%;
+                top: ${top}%;
+                width: ${size}px;
+                height: ${size}px;
+                background: ${hue};
+                box-shadow: 0 0 ${size * 2}px ${hue}, 0 0 ${size * 4}px ${hue}80;
+                animation-delay: -${delay}s, -${delay / 2}s;
+                animation-duration: ${duration}s, ${2 + Math.random() * 3}s;
+              }
+            `;
+          })
+          .join("")}
       `}</style>
       <style>{`
         .neon-slogan {
