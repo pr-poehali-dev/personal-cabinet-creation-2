@@ -47,9 +47,9 @@ export default function Login({ onLogin }: LoginProps) {
 
 
 
-      <div className="relative z-10 w-full max-w-7xl grid lg:grid-cols-[1fr_1.1fr] gap-10 items-start mt-24 lg:mt-16 mb-8">
+      <div className="relative z-10 w-full max-w-7xl grid lg:grid-cols-[1fr_1.1fr] gap-10 items-center justify-items-center mt-24 lg:mt-16 mb-8 mx-auto">
         {/* Left - login form */}
-        <div className="bg-build-card/90 border border-build-border rounded-3xl p-10 backdrop-blur-md shadow-2xl">
+        <div className="bg-build-card/90 border border-build-border rounded-3xl p-10 backdrop-blur-md shadow-2xl w-full max-w-md">
           {/* Большой логотип с тонкой светящейся обводкой */}
           <div className="flex flex-col items-center mb-8">
             <div className="logo-outline-glow relative w-44 h-44 rounded-3xl flex items-center justify-center mb-5">
