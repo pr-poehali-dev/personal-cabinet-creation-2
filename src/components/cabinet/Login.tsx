@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
 import { roles, Role, getRoleByLogin } from "./roles";
-import AnimatedBackground from "./AnimatedBackground";
 import VersionBadge from "./VersionBadge";
 
 interface LoginProps {
@@ -32,24 +31,59 @@ export default function Login({ onLogin }: LoginProps) {
   };
 
   return (
-    <div className="min-h-screen bg-build-dark font-golos flex items-center justify-center p-4 relative overflow-hidden">
-      <AnimatedBackground />
-
-      {/* Слоган компании */}
-      <div className="absolute top-6 left-1/2 -translate-x-1/2 z-10 text-center px-4">
-        <div className="font-oswald text-white text-base md:text-xl font-semibold tracking-[0.25em] uppercase">
-          Безопасное качество
-        </div>
-        <div className="text-gs-accent text-[11px] md:text-sm tracking-[0.4em] uppercase mt-1">
-          доступное каждому
+    <div
+      className="min-h-screen font-golos flex items-center justify-center p-4 relative overflow-hidden"
+      style={{
+        background:
+          "radial-gradient(ellipse at center, #1a1a1a 0%, #0a0a0a 60%, #000000 100%)",
+      }}
+    >
+      {/* Неоновый слоган сверху */}
+      <div className="absolute top-8 left-1/2 -translate-x-1/2 z-10 text-center px-4">
+        <div className="neon-slogan font-oswald text-2xl md:text-4xl font-bold tracking-[0.3em] uppercase">
+          Качество доступное каждому
         </div>
       </div>
 
+      <style>{`
+        .neon-slogan {
+          color: #fff;
+          text-shadow:
+            0 0 4px #fff,
+            0 0 8px #60a5fa,
+            0 0 16px #3b82f6,
+            0 0 28px #1e3a8a,
+            0 0 48px #1e3a8a;
+          animation: neonFlicker 3s ease-in-out infinite;
+        }
+        @keyframes neonFlicker {
+          0%, 100% {
+            text-shadow:
+              0 0 4px #fff,
+              0 0 8px #60a5fa,
+              0 0 16px #3b82f6,
+              0 0 28px #1e3a8a,
+              0 0 48px #1e3a8a;
+            opacity: 1;
+          }
+          45% { opacity: 1; }
+          47% { opacity: 0.85; }
+          49% { opacity: 1; }
+          50% {
+            text-shadow:
+              0 0 6px #fff,
+              0 0 12px #93c5fd,
+              0 0 24px #60a5fa,
+              0 0 40px #3b82f6,
+              0 0 60px #1e3a8a;
+          }
+        }
+      `}</style>
 
-
-      <div className="relative z-10 w-full max-w-7xl grid lg:grid-cols-[1fr_1.1fr] gap-10 items-center justify-items-center mt-24 lg:mt-16 mb-8 mx-auto">
+      {/* Центрированная форма входа */}
+      <div className="relative z-10 w-full max-w-7xl grid lg:grid-cols-[1fr_1.1fr] gap-10 items-center justify-items-center mx-auto">
         {/* Left - login form */}
-        <div className="bg-build-card/90 border border-build-border rounded-3xl p-10 backdrop-blur-md shadow-2xl w-full max-w-md">
+        <div className="bg-[#111111]/90 border border-white/10 rounded-3xl p-10 backdrop-blur-md shadow-2xl w-full max-w-md">
           {/* Большой логотип с тонкой светящейся обводкой */}
           <div className="flex flex-col items-center mb-8">
             <div className="logo-outline-glow relative w-44 h-44 rounded-3xl flex items-center justify-center mb-5">
