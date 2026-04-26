@@ -97,5 +97,21 @@
 
   body {
     @apply bg-background text-foreground;
+    background-color: #0d0d0d;
+    font-family: "Golos Text", sans-serif;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #111111;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2a2a2a;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ff6b00;
   }
 }
