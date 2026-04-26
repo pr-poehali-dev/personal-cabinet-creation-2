@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
 import { roles, Role, getRoleByLogin } from "./roles";
+import AnimatedBackground from "./AnimatedBackground";
 
 interface LoginProps {
   onLogin: (role: Role) => void;
@@ -31,18 +32,19 @@ export default function Login({ onLogin }: LoginProps) {
 
   return (
     <div className="min-h-screen bg-build-dark font-golos flex items-center justify-center p-4 relative overflow-hidden">
-      <div
-        className="absolute inset-0 opacity-20"
-        style={{
-          backgroundImage: `url(https://cdn.poehali.dev/projects/13dba3bf-6323-4724-9f70-0455e15a1ea0/files/67c7cb23-7b37-4d20-983b-d9e449d19cb2.jpg)`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          filter: "blur(8px)",
-        }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-br from-build-dark via-build-dark/95 to-build-orange/10" />
+      <AnimatedBackground />
 
-      <div className="relative z-10 w-full max-w-5xl grid lg:grid-cols-2 gap-8 items-center">
+      {/* Слоган компании */}
+      <div className="absolute top-6 left-1/2 -translate-x-1/2 z-10 text-center px-4">
+        <div className="font-oswald text-white text-base md:text-xl font-semibold tracking-[0.25em] uppercase">
+          Безопасное качество
+        </div>
+        <div className="text-gs-accent text-[11px] md:text-sm tracking-[0.4em] uppercase mt-1">
+          доступное каждому
+        </div>
+      </div>
+
+      <div className="relative z-10 w-full max-w-5xl grid lg:grid-cols-2 gap-8 items-center mt-20 lg:mt-12">
         {/* Left - login form */}
         <div className="bg-build-card border border-build-border rounded-3xl p-8 backdrop-blur">
           <div className="flex items-center gap-3 mb-8">

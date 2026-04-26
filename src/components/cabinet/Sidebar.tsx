@@ -31,7 +31,7 @@ export default function Sidebar({ active, setActive, sidebarOpen, setSidebarOpen
             />
             <div className="min-w-0">
               <div className="font-oswald text-white text-base font-semibold tracking-wide leading-none truncate">ГлобалСтрой</div>
-              <div className="text-gs-accent text-[10px] tracking-[0.15em] uppercase mt-1.5">Уральская СК</div>
+              <div className="text-gs-accent text-[9px] tracking-[0.15em] uppercase mt-1.5 leading-tight">Безопасное качество<br/>доступное каждому</div>
             </div>
           </div>
         </div>
