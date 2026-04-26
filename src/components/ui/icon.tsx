@@ -39,6 +39,10 @@ const variantByName: Record<string, IconProps['variant']> = {
   // Связь / сообщения / медиа — бирюзовый
   MessageCircle: 'teal', MessageSquare: 'teal', Phone: 'teal', Mail: 'teal',
   Send: 'teal', Camera: 'teal', Video: 'teal', UserPlus: 'teal', Contact: 'teal',
+  User: 'teal', Users: 'teal',
+
+  // Юриспруденция, баланс — золотой/фиолетовый
+  Scale: 'gold',
 };
 
 const Icon: React.FC<IconProps> = ({

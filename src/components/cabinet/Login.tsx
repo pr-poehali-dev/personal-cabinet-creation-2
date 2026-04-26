@@ -45,15 +45,35 @@ export default function Login({ onLogin }: LoginProps) {
       {/* Жёлтая декоративная полоса слева — брендовый акцент */}
       <div className="absolute top-0 left-0 w-1.5 h-full bg-gs-yellow z-20" />
 
-      {/* Огромный лёгкий логотип в фоне */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+      {/* Усиленный фоновый логотип */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
+        {/* Светящееся пятно за логотипом */}
+        <div
+          className="absolute w-[80vw] h-[80vw] max-w-[900px] max-h-[900px] rounded-full"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(96,165,250,0.18) 0%, rgba(59,130,246,0.08) 30%, transparent 70%)",
+            filter: "blur(40px)",
+          }}
+        />
         <img
           src="https://cdn.poehali.dev/projects/13dba3bf-6323-4724-9f70-0455e15a1ea0/bucket/e86a33ff-bcc0-41ee-ad09-efce63f6f6e6.png"
           alt=""
-          className="w-[60vw] max-w-[700px] h-auto opacity-[0.06] select-none"
-          style={{ filter: "drop-shadow(0 0 60px rgba(96,165,250,0.4))" }}
+          className="relative w-[75vw] max-w-[850px] h-auto select-none"
+          style={{
+            opacity: 0.18,
+            filter:
+              "drop-shadow(0 0 30px rgba(147,197,253,0.7)) drop-shadow(0 0 80px rgba(59,130,246,0.5)) drop-shadow(0 0 140px rgba(30,58,138,0.4))",
+            animation: "logoBgPulse 8s ease-in-out infinite",
+          }}
         />
       </div>
+      <style>{`
+        @keyframes logoBgPulse {
+          0%, 100% { opacity: 0.15; transform: scale(1); }
+          50% { opacity: 0.22; transform: scale(1.03); }
+        }
+      `}</style>
       <style>{`
         .neon-slogan {
           color: #FCDD2B;
@@ -81,8 +101,15 @@ export default function Login({ onLogin }: LoginProps) {
           backdrop-filter: blur(8px);
         }
 
-        /* Синий бегущий луч на карточках ролей при hover */
-        .role-card::before {
+        /* Тонкая статичная синяя обводка для всех карточек */
+        .role-card,
+        .login-card {
+          border: 1px solid rgba(96, 165, 250, 0.25);
+        }
+
+        /* Бегущая ТОЧКА-ЛУЧ по периметру (вместо длинного луча) — точка-огонёк */
+        .role-card::before,
+        .login-card::before {
           content: "";
           position: absolute;
           inset: -2px;
@@ -91,58 +118,64 @@ export default function Login({ onLogin }: LoginProps) {
           background: conic-gradient(
             from var(--gs-angle, 0deg),
             transparent 0%,
-            transparent 65%,
-            #3b82f6 75%,
-            #93c5fd 82%,
-            #ffffff 88%,
-            #60a5fa 94%,
-            transparent 100%
+            transparent 92%,
+            #93c5fd 96%,
+            #ffffff 98%,
+            #93c5fd 100%
           );
           -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
           mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
           -webkit-mask-composite: xor;
           mask-composite: exclude;
-          animation: borderRotate 2.5s linear infinite;
+          animation: borderRotate 4s linear infinite;
           opacity: 0;
           transition: opacity 0.4s ease;
           pointer-events: none;
-          filter: drop-shadow(0 0 8px #60a5fa) drop-shadow(0 0 16px #3b82f6);
+          filter:
+            drop-shadow(0 0 6px #60a5fa)
+            drop-shadow(0 0 14px #3b82f6)
+            drop-shadow(0 0 22px #1e3a8a);
         }
-        .role-card:hover::before {
+        .role-card:hover::before,
+        .login-card:hover::before {
           opacity: 1;
         }
-        .role-card:hover {
+        .role-card:hover,
+        .login-card:hover {
           box-shadow:
-            0 0 30px rgba(59, 130, 246, 0.55),
-            0 0 60px rgba(96, 165, 250, 0.35),
-            0 0 90px rgba(30, 58, 138, 0.25);
+            0 0 24px rgba(96, 165, 250, 0.45),
+            0 0 50px rgba(59, 130, 246, 0.3);
         }
 
-        /* Оранжевое свечение кнопки "Войти" */
+        /* Кнопка "Войти" — мощное оранжевое свечение при hover */
         .login-btn {
           position: relative;
           isolation: isolate;
           background: linear-gradient(135deg, #6B7C90 0%, #1A2D4D 100%);
-          transition: all 0.3s ease;
+          transition: all 0.4s ease;
         }
         .login-btn::after {
           content: "";
           position: absolute;
-          inset: -3px;
+          inset: -8px;
           border-radius: inherit;
-          background: linear-gradient(135deg, #FCDD2B, #F77D00);
+          background: radial-gradient(circle, #F77D00 0%, #FCDD2B 40%, transparent 70%);
           z-index: -1;
           opacity: 0;
-          filter: blur(12px);
-          transition: opacity 0.4s ease;
+          filter: blur(20px);
+          transition: opacity 0.5s ease;
         }
         .login-btn:hover {
-          background: linear-gradient(135deg, #F77D00 0%, #FCDD2B 100%);
+          background: linear-gradient(135deg, #FCDD2B 0%, #F77D00 50%, #F77D00 100%) !important;
           color: #1A2D4D !important;
+          text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
           box-shadow:
-            0 0 24px rgba(247, 125, 0, 0.7),
-            0 0 48px rgba(252, 221, 43, 0.5),
-            0 0 80px rgba(247, 125, 0, 0.3);
+            0 0 0 2px #FCDD2B,
+            0 0 32px rgba(247, 125, 0, 1),
+            0 0 64px rgba(252, 221, 43, 0.85),
+            0 0 100px rgba(247, 125, 0, 0.6),
+            0 0 140px rgba(252, 221, 43, 0.4);
+          transform: scale(1.02);
         }
         .login-btn:hover::after {
           opacity: 1;
@@ -243,12 +276,7 @@ export default function Login({ onLogin }: LoginProps) {
                 className="role-card group relative rounded-2xl p-4 text-left transition-all duration-300 hover:-translate-y-1 overflow-hidden shadow-md hover:shadow-xl"
               >
                 <div className="flex items-center gap-3 mb-2">
-                  <div
-                    className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
-                    style={{ background: "linear-gradient(135deg, #6B7C90 0%, #1A2D4D 100%)" }}
-                  >
-                    <Icon name={r.icon} size={20} flat className="text-white" />
-                  </div>
+                  <Icon name={r.icon} size={22} />
                   <div className="min-w-0 flex-1">
                     <div className="text-gs-navy text-sm font-bold truncate leading-tight">{r.name}</div>
                     <div className="text-gs-gray text-[10px] font-mono truncate mt-0.5">{r.loginId}</div>
