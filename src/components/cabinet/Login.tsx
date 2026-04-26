@@ -11,6 +11,7 @@ export default function Login({ onLogin }: LoginProps) {
   const [loginId, setLoginId] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState<Role | null>(null);
   const particlesRef = useRef<HTMLDivElement>(null);
 
   // Эффект притяжения частиц к курсору
@@ -74,7 +75,9 @@ export default function Login({ onLogin }: LoginProps) {
     const role = getRoleByLogin(loginId.trim(), password.trim());
     if (role) {
       setError("");
-      onLogin(role);
+      setLoading(role);
+      // Запуск перехода: формы разъезжаются, логотип в центре, потом вход
+      setTimeout(() => onLogin(role), 2200);
     } else {
       setError("Неверный ID или пароль");
     }
@@ -93,7 +96,7 @@ export default function Login({ onLogin }: LoginProps) {
 
   return (
     <div
-      className="min-h-screen font-inter flex items-center justify-center p-4 relative overflow-hidden"
+      className={`min-h-screen font-inter flex items-center justify-center p-4 relative overflow-hidden ${loading ? "login-loading" : ""}`}
       style={{
         background:
           "radial-gradient(ellipse at top left, #3A4C67 0%, transparent 55%), radial-gradient(ellipse at bottom right, #6B7C90 0%, transparent 55%), linear-gradient(135deg, #1A2D4D 0%, #0F1E33 100%)",
@@ -144,27 +147,153 @@ export default function Login({ onLogin }: LoginProps) {
           50% { opacity: 0.22; transform: scale(1.03); }
         }
 
-        /* Орбитальные круги */
+        /* Орбитальные круги — с подсветкой */
         .orbit {
           position: absolute;
           border-radius: 50%;
-          border: 1px dashed rgba(147, 197, 253, 0.15);
-          animation: orbitSpin 60s linear infinite;
+          animation: orbitSpin 60s linear infinite, orbitGlow 4s ease-in-out infinite;
+          will-change: transform, box-shadow;
         }
-        .orbit-1 { width: 50vw; height: 50vw; max-width: 600px; max-height: 600px; }
+        .orbit-1 {
+          width: 50vw; height: 50vw; max-width: 600px; max-height: 600px;
+          border: 1.5px solid rgba(147, 197, 253, 0.45);
+          box-shadow:
+            0 0 30px rgba(96, 165, 250, 0.45),
+            inset 0 0 40px rgba(96, 165, 250, 0.25);
+        }
         .orbit-2 {
           width: 65vw; height: 65vw; max-width: 750px; max-height: 750px;
-          animation-duration: 90s; animation-direction: reverse;
-          border-color: rgba(96, 165, 250, 0.12);
+          animation-duration: 90s, 5s; animation-direction: reverse, normal;
+          border: 1.5px solid rgba(96, 165, 250, 0.35);
+          box-shadow:
+            0 0 24px rgba(59, 130, 246, 0.4),
+            inset 0 0 32px rgba(59, 130, 246, 0.18);
         }
         .orbit-3 {
           width: 85vw; height: 85vw; max-width: 950px; max-height: 950px;
-          animation-duration: 120s;
-          border-color: rgba(59, 130, 246, 0.08);
+          animation-duration: 120s, 6s;
+          border: 1.5px dashed rgba(252, 221, 43, 0.25);
+          box-shadow:
+            0 0 20px rgba(252, 221, 43, 0.25),
+            inset 0 0 24px rgba(252, 221, 43, 0.12);
         }
         @keyframes orbitSpin {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
+        }
+        @keyframes orbitGlow {
+          0%, 100% { filter: brightness(1); }
+          50% { filter: brightness(1.5) saturate(1.3); }
+        }
+
+        /* === АНИМАЦИЯ ВХОДА В ЛК === */
+        /* Форма уезжает влево, роли уезжают вправо */
+        .login-loading .login-card {
+          animation: slideOutLeft 0.7s cubic-bezier(0.6, 0, 0.4, 1) forwards;
+        }
+        .login-loading .roles-pane {
+          animation: slideOutRight 0.7s cubic-bezier(0.6, 0, 0.4, 1) forwards;
+        }
+        @keyframes slideOutLeft {
+          to { transform: translateX(-180%) scale(0.7); opacity: 0; }
+        }
+        @keyframes slideOutRight {
+          to { transform: translateX(180%) scale(0.7); opacity: 0; }
+        }
+
+        /* Финальный логотип-загрузчик */
+        .loader-stage {
+          position: fixed;
+          inset: 0;
+          z-index: 30;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          opacity: 0;
+          animation: stageFadeIn 0.5s ease-out 0.5s forwards;
+          pointer-events: none;
+        }
+        @keyframes stageFadeIn {
+          to { opacity: 1; }
+        }
+        .loader-logo {
+          width: 220px;
+          height: 220px;
+          object-fit: contain;
+          filter:
+            drop-shadow(0 0 30px rgba(147,197,253,0.9))
+            drop-shadow(0 0 60px rgba(59,130,246,0.7))
+            drop-shadow(0 0 100px rgba(252,221,43,0.4));
+          animation: loaderPulse 1.6s ease-in-out infinite;
+        }
+        @keyframes loaderPulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.06); }
+        }
+        .loader-ring {
+          position: absolute;
+          width: 320px;
+          height: 320px;
+          border-radius: 50%;
+          border: 2px solid transparent;
+          border-top-color: #FCDD2B;
+          border-right-color: #F77D00;
+          animation: loaderSpin 1.2s linear infinite;
+          box-shadow: 0 0 30px rgba(252,221,43,0.5);
+        }
+        .loader-ring.r2 {
+          width: 380px;
+          height: 380px;
+          border-top-color: #60a5fa;
+          border-left-color: #93c5fd;
+          animation-duration: 2s;
+          animation-direction: reverse;
+          box-shadow: 0 0 24px rgba(96,165,250,0.5);
+        }
+        @keyframes loaderSpin {
+          to { transform: rotate(360deg); }
+        }
+        .loader-text {
+          margin-top: 220px;
+          color: #fff;
+          font-family: 'Inter', sans-serif;
+          font-weight: 700;
+          letter-spacing: 0.3em;
+          font-size: 14px;
+          text-transform: uppercase;
+          animation: loaderTextBlink 1.4s ease-in-out infinite;
+        }
+        .loader-role {
+          margin-top: 8px;
+          color: #FCDD2B;
+          font-family: 'Inter', sans-serif;
+          font-weight: 600;
+          letter-spacing: 0.2em;
+          font-size: 12px;
+          text-transform: uppercase;
+        }
+        @keyframes loaderTextBlink {
+          0%, 100% { opacity: 0.6; }
+          50% { opacity: 1; }
+        }
+        .loader-progress {
+          margin-top: 24px;
+          width: 240px;
+          height: 2px;
+          background: rgba(255,255,255,0.1);
+          border-radius: 2px;
+          overflow: hidden;
+        }
+        .loader-progress-bar {
+          height: 100%;
+          background: linear-gradient(90deg, #FCDD2B, #F77D00);
+          width: 0;
+          animation: loaderProgress 1.7s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+          box-shadow: 0 0 12px #F77D00;
+        }
+        @keyframes loaderProgress {
+          to { width: 100%; }
         }
 
         /* Звёздная пыль вокруг логотипа */
@@ -409,7 +538,7 @@ export default function Login({ onLogin }: LoginProps) {
         </div>
 
         {/* Right - quick login (роли) */}
-        <div className="w-full">
+        <div className="w-full roles-pane">
           <div className="mb-5 border-l-4 border-gs-yellow pl-3">
             <div className="text-white text-xs uppercase tracking-[0.2em] font-bold">Выберите роль</div>
             <div className="text-gs-yellow text-[11px] mt-1">ID подставится автоматически</div>
@@ -449,6 +578,25 @@ export default function Login({ onLogin }: LoginProps) {
           </div>
         </div>
       </div>
+
+      {/* Стадия загрузки кабинета */}
+      {loading && (
+        <div className="loader-stage">
+          <div className="loader-ring r2" />
+          <div className="loader-ring" />
+          <img
+            src="https://cdn.poehali.dev/projects/13dba3bf-6323-4724-9f70-0455e15a1ea0/bucket/e86a33ff-bcc0-41ee-ad09-efce63f6f6e6.png"
+            alt="ГЛОБАЛСТ"
+            className="loader-logo"
+          />
+          <div className="loader-text">Загрузка кабинета</div>
+          <div className="loader-role">{loading.fullName}</div>
+          <div className="loader-progress">
+            <div className="loader-progress-bar" />
+          </div>
+        </div>
+      )}
+
       <VersionBadge />
     </div>
   );
