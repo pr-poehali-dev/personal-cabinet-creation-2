@@ -116,26 +116,53 @@
     background: #fcdd2b;
   }
 
-  /* Глобальная белая прозрачная палитра для карточек кабинета */
+  /* === ЕДИНАЯ БРЕНДОВАЯ ТЕМА КАБИНЕТА === */
+
+  /* Все карточки кабинета — белые прозрачные с blur */
   .bg-build-card {
-    background: rgba(255, 255, 255, 0.9) !important;
-    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.92) !important;
+    backdrop-filter: blur(10px);
+    color: #1a2d4d;
+    border: 1px solid rgba(96, 165, 250, 0.25);
+  }
+  .bg-\[\#161616\],
+  .bg-\[\#0F1F3D\],
+  .bg-\[\#0F1F3D\]\/80,
+  .bg-\[\#070D1E\] {
+    background: rgba(255, 255, 255, 0.92) !important;
+    backdrop-filter: blur(10px);
     color: #1a2d4d;
   }
+  .bg-build-dark {
+    background: transparent !important;
+  }
+  .bg-build-dark\/50 {
+    background: rgba(245, 247, 252, 0.7) !important;
+  }
+
+  /* Бордеры */
   .border-build-border {
     border-color: rgba(96, 165, 250, 0.25) !important;
   }
-  .bg-build-dark {
-    background-color: transparent !important;
+  .border-build-border\/50,
+  .border-build-border\/60,
+  .divide-build-border\/50 > * + * {
+    border-color: rgba(96, 165, 250, 0.18) !important;
   }
-  .text-white {
-    /* оставить белым в шапке/sidebar, но в карточках текст должен быть тёмным */
-  }
-  /* Внутри карточек переопределим белый текст на тёмный */
+
+  /* Текст внутри карточек — тёмно-синий по брендбуку */
   .bg-build-card .text-white {
     color: #1a2d4d !important;
   }
-  .bg-build-card .text-gray-300,
+  .bg-build-card h1,
+  .bg-build-card h2,
+  .bg-build-card h3 {
+    color: #1a2d4d !important;
+  }
+  .bg-build-card .text-gray-200,
+  .bg-build-card .text-gray-300 {
+    color: #3a4c67 !important;
+  }
   .bg-build-card .text-gray-400 {
     color: #6b7c90 !important;
   }
@@ -143,16 +170,30 @@
   .bg-build-card .text-gray-600 {
     color: #8b96a8 !important;
   }
+  .bg-build-card input,
+  .bg-build-card textarea,
+  .bg-build-card select {
+    color: #1a2d4d !important;
+    background: #f5f7fc !important;
+    border-color: rgba(107, 124, 144, 0.3) !important;
+  }
+  .bg-build-card input::placeholder,
+  .bg-build-card textarea::placeholder {
+    color: rgba(107, 124, 144, 0.6) !important;
+  }
+
+  /* Акценты — оранжевый/синий заменяются на жёлтый брендовый */
   .bg-build-card .text-build-orange {
     color: #1a2d4d !important;
   }
-  .bg-build-card .bg-build-orange,
-  .bg-build-card .bg-build-orange\/10,
-  .bg-build-card .bg-build-orange\/20 {
+  .bg-build-card .bg-build-orange {
     background-color: #fcdd2b !important;
+    color: #1a2d4d !important;
   }
-  .bg-build-card .bg-build-orange\/15 {
-    background-color: rgba(252, 221, 43, 0.4) !important;
+  .bg-build-card .bg-build-orange\/10,
+  .bg-build-card .bg-build-orange\/15,
+  .bg-build-card .bg-build-orange\/20 {
+    background-color: rgba(252, 221, 43, 0.25) !important;
   }
   .bg-build-card .border-build-orange,
   .bg-build-card .border-build-orange\/30,
@@ -160,12 +201,69 @@
   .bg-build-card .border-build-orange\/50 {
     border-color: #fcdd2b !important;
   }
-  .bg-build-card .divide-build-border\/50 > * + * {
-    border-color: rgba(96, 165, 250, 0.15) !important;
+  .bg-build-card .hover\:bg-orange-600:hover {
+    background-color: #f77d00 !important;
   }
-  .bg-build-card .border-build-border\/50,
-  .bg-build-card .border-build-border\/60 {
+
+  /* Hover эффекты карточек */
+  .bg-build-card.hover\:border-build-orange\/30:hover,
+  .bg-build-card.hover\:border-build-orange\/40:hover {
+    border-color: rgba(252, 221, 43, 0.6) !important;
+    box-shadow:
+      0 0 24px rgba(96, 165, 250, 0.35),
+      0 0 50px rgba(59, 130, 246, 0.2);
+  }
+
+  /* Шапка таблиц — жёлтая полоса */
+  .bg-build-card thead tr,
+  .bg-build-card th {
+    color: #6b7c90 !important;
+    background: #f5f7fc !important;
     border-color: rgba(96, 165, 250, 0.2) !important;
+  }
+  .bg-build-card tbody tr {
+    border-color: rgba(96, 165, 250, 0.12) !important;
+  }
+  .bg-build-card tbody tr:hover {
+    background: rgba(252, 221, 43, 0.08) !important;
+  }
+
+  /* Прогресс-бары: фон серее */
+  .bg-build-card .bg-white\/10 {
+    background-color: rgba(107, 124, 144, 0.18) !important;
+  }
+  .bg-build-card .bg-white\/5 {
+    background-color: rgba(107, 124, 144, 0.08) !important;
+  }
+  .bg-build-card .hover\:bg-white\/3:hover,
+  .bg-build-card .hover\:bg-white\/5:hover {
+    background-color: rgba(252, 221, 43, 0.08) !important;
+  }
+  .bg-build-card .bg-white\/3 {
+    background-color: rgba(245, 247, 252, 0.5) !important;
+  }
+  /* Бэйджи статусов остаются цветными — не перекрашиваем их */
+  .bg-build-card .bg-green-500\/20 {
+    background-color: rgba(34, 197, 94, 0.15) !important;
+  }
+  .bg-build-card .text-green-400 {
+    color: #16a34a !important;
+  }
+  .bg-build-card .bg-red-500\/20,
+  .bg-build-card .bg-red-500\/15 {
+    background-color: rgba(239, 68, 68, 0.12) !important;
+  }
+  .bg-build-card .text-red-400 {
+    color: #dc2626 !important;
+  }
+  .bg-build-card .bg-yellow-500\/20 {
+    background-color: rgba(252, 221, 43, 0.25) !important;
+  }
+  .bg-build-card .text-yellow-400 {
+    color: #b45309 !important;
+  }
+  .bg-build-card .bg-green-500\/15 {
+    background-color: rgba(34, 197, 94, 0.12) !important;
   }
 
   /* Универсальный класс role-card — прозрачная карточка с неоновой рамкой + бегущая точка */
@@ -213,13 +311,20 @@
       0 0 50px rgba(59, 130, 246, 0.3);
   }
 
-  /* Иконка внутри маленького контейнера (квадратик с фоном) — плоская */
-  div[class*="rounded-lg"][style*="background"] > .icon-3d,
-  div[class*="rounded-xl"][style*="background"] > .icon-3d,
+  /* === Если 3D-иконка лежит внутри собственного цветного контейнера —
+       значит это уже «двойная подложка», убираем 3D-эффект и оставляем только svg === */
+  [class*="rounded"][style*="background"] > .icon-3d,
+  .w-5 > .icon-3d,
+  .w-6 > .icon-3d,
+  .w-7 > .icon-3d,
+  .w-8 > .icon-3d,
   .w-9 > .icon-3d,
   .w-10 > .icon-3d,
   .w-11 > .icon-3d,
-  .w-12 > .icon-3d {
+  .w-12 > .icon-3d,
+  .w-14 > .icon-3d,
+  button > .icon-3d:only-child,
+  .badge-example > .icon-3d {
     background: transparent !important;
     box-shadow: none !important;
     animation: none !important;
@@ -227,28 +332,68 @@
     height: auto !important;
     perspective: none !important;
   }
-  div[class*="rounded-lg"][style*="background"] > .icon-3d .icon-3d__plate,
-  div[class*="rounded-xl"][style*="background"] > .icon-3d .icon-3d__plate,
+  [class*="rounded"][style*="background"] > .icon-3d .icon-3d__plate,
+  [class*="rounded"][style*="background"] > .icon-3d .icon-3d__shadow,
+  [class*="rounded"][style*="background"] > .icon-3d .icon-3d__highlight,
+  [class*="rounded"][style*="background"] > .icon-3d .icon-3d__rim,
+  [class*="rounded"][style*="background"] > .icon-3d .icon-3d__gloss,
+  .w-5 > .icon-3d .icon-3d__plate,
+  .w-5 > .icon-3d .icon-3d__shadow,
+  .w-5 > .icon-3d .icon-3d__highlight,
+  .w-5 > .icon-3d .icon-3d__rim,
+  .w-5 > .icon-3d .icon-3d__gloss,
+  .w-6 > .icon-3d .icon-3d__plate,
+  .w-6 > .icon-3d .icon-3d__shadow,
+  .w-6 > .icon-3d .icon-3d__highlight,
+  .w-6 > .icon-3d .icon-3d__rim,
+  .w-6 > .icon-3d .icon-3d__gloss,
+  .w-7 > .icon-3d .icon-3d__plate,
+  .w-7 > .icon-3d .icon-3d__shadow,
+  .w-7 > .icon-3d .icon-3d__highlight,
+  .w-7 > .icon-3d .icon-3d__rim,
+  .w-7 > .icon-3d .icon-3d__gloss,
+  .w-8 > .icon-3d .icon-3d__plate,
+  .w-8 > .icon-3d .icon-3d__shadow,
+  .w-8 > .icon-3d .icon-3d__highlight,
+  .w-8 > .icon-3d .icon-3d__rim,
+  .w-8 > .icon-3d .icon-3d__gloss,
   .w-9 > .icon-3d .icon-3d__plate,
-  .w-10 > .icon-3d .icon-3d__plate,
-  .w-11 > .icon-3d .icon-3d__plate,
-  .w-12 > .icon-3d .icon-3d__plate {
-    display: none;
-  }
-  div[class*="rounded-lg"][style*="background"] > .icon-3d .icon-3d__shadow,
-  div[class*="rounded-xl"][style*="background"] > .icon-3d .icon-3d__shadow,
   .w-9 > .icon-3d .icon-3d__shadow,
+  .w-9 > .icon-3d .icon-3d__highlight,
+  .w-9 > .icon-3d .icon-3d__rim,
+  .w-9 > .icon-3d .icon-3d__gloss,
+  .w-10 > .icon-3d .icon-3d__plate,
   .w-10 > .icon-3d .icon-3d__shadow,
+  .w-10 > .icon-3d .icon-3d__highlight,
+  .w-10 > .icon-3d .icon-3d__rim,
+  .w-10 > .icon-3d .icon-3d__gloss,
+  .w-11 > .icon-3d .icon-3d__plate,
   .w-11 > .icon-3d .icon-3d__shadow,
-  .w-12 > .icon-3d .icon-3d__shadow {
-    display: none;
+  .w-11 > .icon-3d .icon-3d__highlight,
+  .w-11 > .icon-3d .icon-3d__rim,
+  .w-11 > .icon-3d .icon-3d__gloss,
+  .w-12 > .icon-3d .icon-3d__plate,
+  .w-12 > .icon-3d .icon-3d__shadow,
+  .w-12 > .icon-3d .icon-3d__highlight,
+  .w-12 > .icon-3d .icon-3d__rim,
+  .w-12 > .icon-3d .icon-3d__gloss,
+  .w-14 > .icon-3d .icon-3d__plate,
+  .w-14 > .icon-3d .icon-3d__shadow,
+  .w-14 > .icon-3d .icon-3d__highlight,
+  .w-14 > .icon-3d .icon-3d__rim,
+  .w-14 > .icon-3d .icon-3d__gloss {
+    display: none !important;
   }
-  div[class*="rounded-lg"][style*="background"] > .icon-3d .icon-3d__svg,
-  div[class*="rounded-xl"][style*="background"] > .icon-3d .icon-3d__svg,
+  [class*="rounded"][style*="background"] > .icon-3d .icon-3d__svg,
+  .w-5 > .icon-3d .icon-3d__svg,
+  .w-6 > .icon-3d .icon-3d__svg,
+  .w-7 > .icon-3d .icon-3d__svg,
+  .w-8 > .icon-3d .icon-3d__svg,
   .w-9 > .icon-3d .icon-3d__svg,
   .w-10 > .icon-3d .icon-3d__svg,
   .w-11 > .icon-3d .icon-3d__svg,
-  .w-12 > .icon-3d .icon-3d__svg {
+  .w-12 > .icon-3d .icon-3d__svg,
+  .w-14 > .icon-3d .icon-3d__svg {
     color: inherit;
     filter: none;
     position: static;

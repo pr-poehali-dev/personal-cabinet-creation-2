@@ -14,17 +14,18 @@ export default function DashboardSections({ active, setActive }: Props) {
         <div className="animate-fade-in space-y-6">
           {/* Hero banner */}
           <div
-            className="relative rounded-2xl overflow-hidden h-44 flex items-end p-6"
+            className="relative rounded-2xl overflow-hidden h-40 flex items-end p-5"
             style={{ backgroundImage: `url(https://cdn.poehali.dev/projects/13dba3bf-6323-4724-9f70-0455e15a1ea0/files/67c7cb23-7b37-4d20-983b-d9e449d19cb2.jpg)`, backgroundSize: "cover", backgroundPosition: "center" }}
           >
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-gs-navy/95 via-gs-navy/50 to-transparent" />
+            <div className="absolute top-0 left-0 w-24 h-1 bg-gs-yellow" />
             <div className="relative z-10">
-              <div className="font-oswald text-white text-2xl font-bold tracking-wide">Добрый день!</div>
-              <div className="text-gray-300 text-sm mt-1">4 активных проекта · 12 задач требуют внимания</div>
+              <div className="font-inter text-white text-2xl font-extrabold tracking-tight">Добрый день!</div>
+              <div className="text-white/80 text-sm mt-1">4 активных проекта · 12 задач требуют внимания</div>
             </div>
             <div className="relative z-10 ml-auto text-right">
-              <div className="text-build-orange font-oswald text-3xl font-bold">68%</div>
-              <div className="text-gray-400 text-xs">выполнение плана</div>
+              <div className="text-gs-yellow font-inter text-3xl font-extrabold">68%</div>
+              <div className="text-white/70 text-xs">выполнение плана</div>
             </div>
           </div>
 
@@ -38,21 +39,19 @@ export default function DashboardSections({ active, setActive }: Props) {
             ].map((kpi, i) => (
               <div
                 key={i}
-                className={`rounded-xl p-5 border transition-all duration-300 hover:scale-[1.02] cursor-default ${
-                  kpi.accent
-                    ? "bg-build-orange border-build-orange/50"
-                    : "bg-build-card border-build-border hover:border-build-orange/30"
+                className={`role-card rounded-xl p-4 transition-all duration-300 hover:-translate-y-0.5 cursor-default shadow-md ${
+                  kpi.accent ? "ring-2 ring-gs-yellow" : ""
                 }`}
                 style={{ animationDelay: `${i * 80}ms` }}
               >
-                <div className="flex items-center justify-between mb-3">
-                  <Icon name={kpi.icon} size={20} className={kpi.accent ? "text-white" : "text-build-orange"} />
+                <div className="flex items-center justify-between mb-2">
+                  <Icon name={kpi.icon} size={20} />
                 </div>
-                <div className={`font-oswald text-2xl font-bold ${kpi.accent ? "text-white" : "text-white"}`}>
+                <div className="font-inter text-gs-navy text-xl font-extrabold leading-tight">
                   {kpi.value}
                 </div>
-                <div className={`text-xs mt-1 ${kpi.accent ? "text-orange-100" : "text-gray-500"}`}>{kpi.label}</div>
-                <div className={`text-[11px] mt-0.5 ${kpi.accent ? "text-orange-200" : "text-gray-600"}`}>{kpi.sub}</div>
+                <div className="text-gs-gray text-[11px] mt-1 font-semibold">{kpi.label}</div>
+                <div className="text-gs-gray/70 text-[10px] mt-0.5">{kpi.sub}</div>
               </div>
             ))}
           </div>
