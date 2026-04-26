@@ -57,7 +57,7 @@ export default function Sidebar({ active, setActive, sidebarOpen, setSidebarOpen
                   : "text-gray-400 hover:text-white hover:bg-white/5"
               }`}
             >
-              <Icon name={item.icon} size={18} />
+              <Icon name={item.icon} size={18} flat />
               <span className="flex-1 text-left">{item.label}</span>
               {item.badge && (
                 <span className="bg-build-orange text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center">
@@ -86,7 +86,7 @@ export default function Sidebar({ active, setActive, sidebarOpen, setSidebarOpen
             onClick={onLogout}
             className="w-full flex items-center justify-center gap-2 py-2 rounded-lg bg-white/5 hover:bg-build-orange/20 text-gray-400 hover:text-build-orange text-xs transition-all"
           >
-            <Icon name="LogOut" size={12} />
+            <Icon name="LogOut" size={12} flat />
             Выйти
           </button>
         </div>
