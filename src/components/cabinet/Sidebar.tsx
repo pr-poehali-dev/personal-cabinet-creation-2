@@ -17,7 +17,7 @@ export default function Sidebar({ active, setActive, sidebarOpen, setSidebarOpen
   return (
     <>
       <aside
-        className={`fixed lg:static z-40 h-full w-64 bg-[#0B1E3F] border-r border-build-border flex flex-col transition-transform duration-300 ${
+        className={`fixed lg:static z-40 h-full w-64 bg-[#070D1E]/85 backdrop-blur-md border-r border-build-border flex flex-col transition-transform duration-300 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
@@ -89,20 +89,6 @@ export default function Sidebar({ active, setActive, sidebarOpen, setSidebarOpen
             <Icon name="LogOut" size={12} flat />
             Выйти
           </button>
-
-          {/* Заметка версии для разработки */}
-          <div className="mt-3 pt-3 border-t border-build-border/50">
-            <div className="text-[10px] text-gray-500 leading-snug font-mono">
-              <div className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-gray-400 font-semibold">v1.8</span>
-              </div>
-              <div className="text-gray-600 mt-1 leading-tight">
-                Добавлена роль<br/>
-                Юридический отдел
-              </div>
-            </div>
-          </div>
         </div>
       </aside>
 

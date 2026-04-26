@@ -6,6 +6,8 @@ import DataSections from "@/components/cabinet/DataSections";
 import Login from "@/components/cabinet/Login";
 import RoleHome from "@/components/cabinet/RoleHome";
 import CreateProjectModal from "@/components/cabinet/CreateProjectModal";
+import AnimatedBackground from "@/components/cabinet/AnimatedBackground";
+import VersionBadge from "@/components/cabinet/VersionBadge";
 import { navItems, Section } from "@/components/cabinet/constants";
 import { Role } from "@/components/cabinet/roles";
 
@@ -25,7 +27,8 @@ export default function Index() {
   const canCreateProject = role.id === "gip";
 
   return (
-    <div className="flex h-screen bg-build-dark font-golos overflow-hidden">
+    <div className="flex h-screen bg-build-dark font-golos overflow-hidden relative">
+      <AnimatedBackground />
       <Sidebar
         active={allowed}
         setActive={setActive}
@@ -35,8 +38,8 @@ export default function Index() {
         onLogout={() => { setRole(null); setActive("dashboard"); }}
       />
 
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        <header className="bg-[#111111] border-b border-build-border px-6 py-4 flex items-center gap-4 shrink-0">
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden relative z-10">
+        <header className="bg-[#070D1E]/80 backdrop-blur-md border-b border-build-border px-6 py-4 flex items-center gap-4 shrink-0">
           <button className="lg:hidden text-gray-400 hover:text-white" onClick={() => setSidebarOpen(true)}>
             <Icon name="Menu" size={22} />
           </button>
@@ -76,6 +79,7 @@ export default function Index() {
       </div>
 
       <CreateProjectModal open={createOpen} onClose={() => setCreateOpen(false)} />
+      <VersionBadge />
     </div>
   );
 }

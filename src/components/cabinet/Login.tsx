@@ -2,6 +2,7 @@ import { useState } from "react";
 import Icon from "@/components/ui/icon";
 import { roles, Role, getRoleByLogin } from "./roles";
 import AnimatedBackground from "./AnimatedBackground";
+import VersionBadge from "./VersionBadge";
 
 interface LoginProps {
   onLogin: (role: Role) => void;
@@ -44,15 +45,7 @@ export default function Login({ onLogin }: LoginProps) {
         </div>
       </div>
 
-      {/* Заметка версии */}
-      <div className="absolute bottom-4 left-4 z-10 text-[10px] font-mono text-gray-500 bg-build-card/80 backdrop-blur border border-build-border rounded-lg px-3 py-2">
-        <div className="flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-          <span className="text-gray-300 font-semibold">v1.8</span>
-          <span className="text-gray-600">·</span>
-          <span>Роль «Юридический отдел»</span>
-        </div>
-      </div>
+
 
       <div className="relative z-10 w-full max-w-5xl grid lg:grid-cols-2 gap-8 items-center mt-20 lg:mt-12">
         {/* Left - login form */}
@@ -149,6 +142,7 @@ export default function Login({ onLogin }: LoginProps) {
           </div>
         </div>
       </div>
+      <VersionBadge />
     </div>
   );
 }
