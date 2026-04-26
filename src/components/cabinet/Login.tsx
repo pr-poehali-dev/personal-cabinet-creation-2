@@ -38,9 +38,16 @@ export default function Login({ onLogin }: LoginProps) {
           "radial-gradient(ellipse at center, #1a1a1a 0%, #0a0a0a 60%, #000000 100%)",
       }}
     >
-      {/* Неоновый слоган сверху */}
-      <div className="absolute top-8 left-1/2 -translate-x-1/2 z-10 text-center px-4">
-        <div className="neon-slogan font-oswald text-2xl md:text-4xl font-bold tracking-[0.3em] uppercase">
+      {/* Неоновый слоган — три слова столбиком справа (в линию с карточками ролей) */}
+      <div className="absolute top-8 right-8 z-0 hidden xl:flex flex-col gap-2 items-end pointer-events-none opacity-90">
+        <div className="neon-slogan font-oswald text-2xl tracking-[0.18em] uppercase">Качество</div>
+        <div className="neon-slogan font-oswald text-2xl tracking-[0.18em] uppercase">доступное</div>
+        <div className="neon-slogan font-oswald text-2xl tracking-[0.18em] uppercase">каждому</div>
+      </div>
+
+      {/* Слоган для маленьких экранов — сверху по центру */}
+      <div className="absolute top-6 left-1/2 -translate-x-1/2 z-10 text-center px-4 xl:hidden">
+        <div className="neon-slogan font-oswald text-xl tracking-[0.2em] uppercase">
           Качество доступное каждому
         </div>
       </div>
@@ -48,34 +55,30 @@ export default function Login({ onLogin }: LoginProps) {
       <style>{`
         .neon-slogan {
           color: #fff;
+          font-weight: 300;
           text-shadow:
-            0 0 4px #fff,
-            0 0 8px #60a5fa,
-            0 0 16px #3b82f6,
-            0 0 28px #1e3a8a,
-            0 0 48px #1e3a8a;
-          animation: neonFlicker 3s ease-in-out infinite;
+            0 0 2px #fff,
+            0 0 6px #93c5fd,
+            0 0 12px #60a5fa,
+            0 0 22px #3b82f6;
+          animation: neonFlicker 4s ease-in-out infinite;
         }
         @keyframes neonFlicker {
           0%, 100% {
             text-shadow:
-              0 0 4px #fff,
-              0 0 8px #60a5fa,
-              0 0 16px #3b82f6,
-              0 0 28px #1e3a8a,
-              0 0 48px #1e3a8a;
+              0 0 2px #fff,
+              0 0 6px #93c5fd,
+              0 0 12px #60a5fa,
+              0 0 22px #3b82f6;
             opacity: 1;
           }
-          45% { opacity: 1; }
-          47% { opacity: 0.85; }
-          49% { opacity: 1; }
           50% {
             text-shadow:
-              0 0 6px #fff,
-              0 0 12px #93c5fd,
-              0 0 24px #60a5fa,
-              0 0 40px #3b82f6,
-              0 0 60px #1e3a8a;
+              0 0 4px #fff,
+              0 0 10px #93c5fd,
+              0 0 20px #60a5fa,
+              0 0 32px #3b82f6;
+            opacity: 0.95;
           }
         }
       `}</style>
@@ -183,20 +186,16 @@ export default function Login({ onLogin }: LoginProps) {
           </div>
         </div>
 
-        {/* Right - quick login (demo) */}
-        <div>
-          <div className="mb-6">
-            <h2 className="font-oswald text-white text-2xl font-bold tracking-wide">Демо-доступы</h2>
-            <p className="text-gray-400 text-sm mt-1.5">Кликни по роли — войдёшь автоматически</p>
-          </div>
+        {/* Right - quick login (роли) */}
+        <div className="w-full">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {roles.map((r) => (
               <button
                 key={r.id}
                 onClick={() => quickLogin(r)}
-                className="bg-build-card/90 backdrop-blur border border-build-border rounded-2xl p-5 text-left hover:border-build-orange/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-500/20 group"
+                className="role-card relative bg-[#111111]/90 backdrop-blur rounded-2xl p-5 text-left transition-all duration-300 hover:-translate-y-1 group overflow-hidden"
               >
-                <div className="flex items-center gap-3 mb-3">
+                <div className="relative z-10 flex items-center gap-3 mb-3">
                   <div
                     className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 border"
                     style={{ background: r.color + "20", borderColor: r.color + "40" }}
@@ -208,10 +207,47 @@ export default function Login({ onLogin }: LoginProps) {
                     <div className="text-gray-500 text-xs font-mono truncate">{r.loginId}</div>
                   </div>
                 </div>
-                <div className="text-gray-400 text-xs leading-snug line-clamp-2">{r.description}</div>
+                <div className="relative z-10 text-gray-400 text-xs leading-snug line-clamp-2">{r.description}</div>
               </button>
             ))}
           </div>
+
+          <style>{`
+            .role-card {
+              border: 1px solid rgba(255,255,255,0.08);
+            }
+            .role-card::before {
+              content: "";
+              position: absolute;
+              inset: 0;
+              border-radius: 1rem;
+              padding: 1.5px;
+              background: conic-gradient(
+                from var(--gs-angle, 0deg),
+                rgba(59, 130, 246, 0.05) 0%,
+                #60a5fa 25%,
+                #93c5fd 50%,
+                #3b82f6 75%,
+                rgba(59, 130, 246, 0.05) 100%
+              );
+              -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+              mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+              -webkit-mask-composite: xor;
+              mask-composite: exclude;
+              animation: borderRotate 5s linear infinite;
+              opacity: 0.6;
+              transition: opacity 0.3s ease;
+              pointer-events: none;
+            }
+            .role-card:hover::before {
+              opacity: 1;
+            }
+            .role-card:hover {
+              box-shadow:
+                0 0 24px rgba(59, 130, 246, 0.35),
+                0 0 48px rgba(30, 58, 138, 0.25);
+            }
+          `}</style>
         </div>
       </div>
       <VersionBadge />
