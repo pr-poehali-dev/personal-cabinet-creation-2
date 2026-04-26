@@ -1,14 +1,19 @@
 import Icon from "@/components/ui/icon";
 import { navItems, Section } from "./constants";
+import { Role } from "./roles";
 
 interface SidebarProps {
   active: Section;
   setActive: (s: Section) => void;
   sidebarOpen: boolean;
   setSidebarOpen: (v: boolean) => void;
+  role: Role;
+  onLogout: () => void;
 }
 
-export default function Sidebar({ active, setActive, sidebarOpen, setSidebarOpen }: SidebarProps) {
+export default function Sidebar({ active, setActive, sidebarOpen, setSidebarOpen, role, onLogout }: SidebarProps) {
+  const allowed = navItems.filter((n) => role.sections.includes(n.id));
+
   return (
     <>
       <aside
@@ -29,9 +34,18 @@ export default function Sidebar({ active, setActive, sidebarOpen, setSidebarOpen
           </div>
         </div>
 
+        {/* Role pill */}
+        <div className="px-5 py-3 border-b border-build-border">
+          <div className="flex items-center gap-2 text-[11px]">
+            <div className="w-1.5 h-1.5 rounded-full" style={{ background: role.color }} />
+            <span className="text-gray-500 uppercase tracking-wider">Роль:</span>
+            <span className="text-white font-semibold">{role.shortName}</span>
+          </div>
+        </div>
+
         {/* Nav */}
         <nav className="flex-1 py-4 overflow-y-auto">
-          {navItems.map((item) => (
+          {allowed.map((item) => (
             <button
               key={item.id}
               onClick={() => { setActive(item.id); setSidebarOpen(false); }}
@@ -54,16 +68,25 @@ export default function Sidebar({ active, setActive, sidebarOpen, setSidebarOpen
 
         {/* User */}
         <div className="px-5 py-4 border-t border-build-border">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-build-orange/20 border border-build-orange/40 flex items-center justify-center">
-              <span className="text-build-orange text-xs font-bold">ГД</span>
+          <div className="flex items-center gap-3 mb-3">
+            <div
+              className="w-8 h-8 rounded-full border flex items-center justify-center shrink-0"
+              style={{ background: role.color + "20", borderColor: role.color + "60" }}
+            >
+              <span className="text-xs font-bold" style={{ color: role.color }}>{role.shortName}</span>
             </div>
             <div className="flex-1 min-w-0">
-              <div className="text-white text-xs font-medium truncate">Генеральный директор</div>
-              <div className="text-gray-500 text-[11px] truncate">Полный доступ</div>
+              <div className="text-white text-xs font-medium truncate">{role.name}</div>
+              <div className="text-gray-500 text-[11px] truncate font-mono">{role.loginId}</div>
             </div>
-            <Icon name="Settings" size={14} className="text-gray-500 hover:text-white cursor-pointer" />
           </div>
+          <button
+            onClick={onLogout}
+            className="w-full flex items-center justify-center gap-2 py-2 rounded-lg bg-white/5 hover:bg-build-orange/20 text-gray-400 hover:text-build-orange text-xs transition-all"
+          >
+            <Icon name="LogOut" size={12} />
+            Выйти
+          </button>
         </div>
       </aside>
 
