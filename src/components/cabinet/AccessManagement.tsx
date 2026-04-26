@@ -47,14 +47,171 @@ export default function AccessManagement() {
     setRevealed((prev) => ({ ...prev, [id]: true }));
   };
 
-  const issueAccess = (id: string) => {
+  const generateDocument = (row: AccessRow) => {
+    const today = new Date().toLocaleDateString("ru-RU", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    });
+    const docNumber = `ГС-${new Date().getFullYear()}-${Math.floor(Math.random() * 9000 + 1000)}`;
+    const r = row.role;
+
+    const html = `<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Доступ к ЛК — ${r.name} — ${r.loginId}</title>
+<style>
+  @page { size: A4; margin: 20mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Helvetica', Arial, sans-serif; }
+  body { color: #0B1E3F; line-height: 1.5; padding: 40px; max-width: 800px; margin: 0 auto; }
+  .header { display: flex; align-items: center; gap: 20px; padding-bottom: 20px; border-bottom: 3px solid #1E3A8A; margin-bottom: 30px; }
+  .logo { width: 70px; height: 70px; background: #1E3A8A; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 32px; font-weight: bold; }
+  .brand-name { font-size: 28px; font-weight: bold; color: #0B1E3F; letter-spacing: -0.5px; }
+  .brand-sub { font-size: 11px; color: #1E3A8A; text-transform: uppercase; letter-spacing: 2px; margin-top: 4px; font-weight: 600; }
+  .doc-meta { text-align: right; font-size: 12px; color: #555; }
+  .doc-meta strong { color: #0B1E3F; }
+  .doc-title { font-size: 22px; font-weight: bold; text-align: center; margin: 30px 0 10px; color: #0B1E3F; text-transform: uppercase; letter-spacing: 1px; }
+  .doc-subtitle { text-align: center; color: #666; font-size: 13px; margin-bottom: 30px; }
+  .credentials { background: linear-gradient(135deg, #f0f4ff 0%, #e0e9ff 100%); border: 2px solid #1E3A8A; border-radius: 14px; padding: 28px; margin: 24px 0; }
+  .cred-title { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: #1E3A8A; font-weight: 700; margin-bottom: 18px; text-align: center; }
+  .cred-row { display: flex; align-items: center; padding: 14px 18px; background: #fff; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid #1E3A8A; }
+  .cred-label { font-size: 11px; text-transform: uppercase; color: #666; letter-spacing: 1px; width: 130px; font-weight: 600; }
+  .cred-value { font-family: 'Courier New', monospace; font-size: 22px; font-weight: bold; color: #0B1E3F; letter-spacing: 2px; }
+  .info-block { background: #fafbff; border-left: 4px solid #1E3A8A; padding: 16px 20px; margin: 20px 0; font-size: 13px; line-height: 1.7; border-radius: 6px; }
+  .info-block strong { color: #1E3A8A; }
+  .role-info { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+  .role-info-item { padding: 12px 16px; background: #f5f7fb; border-radius: 8px; }
+  .role-info-label { font-size: 10px; text-transform: uppercase; color: #888; letter-spacing: 1px; }
+  .role-info-value { font-size: 14px; font-weight: 600; color: #0B1E3F; margin-top: 4px; }
+  .features { margin: 20px 0; }
+  .features-title { font-size: 14px; font-weight: bold; color: #0B1E3F; margin-bottom: 10px; }
+  .features-list { padding-left: 20px; font-size: 13px; line-height: 1.8; color: #333; }
+  .signatures { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 60px; }
+  .sign-block { border-top: 2px solid #0B1E3F; padding-top: 8px; }
+  .sign-label { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+  .sign-name { font-size: 14px; font-weight: 600; color: #0B1E3F; margin-top: 6px; }
+  .sign-line { font-size: 12px; color: #888; margin-top: 12px; }
+  .footer { margin-top: 50px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center; font-size: 11px; color: #888; }
+  .slogan { font-style: italic; color: #1E3A8A; margin-top: 6px; font-weight: 600; letter-spacing: 1px; }
+  .warning { background: #fff8e1; border-left: 4px solid #f59e0b; padding: 14px 18px; margin: 20px 0; font-size: 12px; color: #78350f; border-radius: 6px; }
+  @media print { body { padding: 0; } }
+</style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">ГС</div>
+    <div style="flex: 1;">
+      <div class="brand-name">ГлобалСтрой</div>
+      <div class="brand-sub">Уральская строительная компания</div>
+    </div>
+    <div class="doc-meta">
+      <div><strong>№ ${docNumber}</strong></div>
+      <div>${today}</div>
+    </div>
+  </div>
+
+  <div class="doc-title">Акт выдачи доступа к личному кабинету</div>
+  <div class="doc-subtitle">к информационной системе управления строительными проектами</div>
+
+  <div class="info-block">
+    Настоящим актом подтверждается выдача персональных учётных данных для входа в личный кабинет
+    информационной системы «ГлобалСтрой» пользователю в рамках подписанного договора о подключении.
+  </div>
+
+  <div class="role-info">
+    <div class="role-info-item">
+      <div class="role-info-label">Роль пользователя</div>
+      <div class="role-info-value">${r.fullName}</div>
+    </div>
+    <div class="role-info-item">
+      <div class="role-info-label">Сокращённо</div>
+      <div class="role-info-value">${r.shortName}</div>
+    </div>
+  </div>
+
+  <div class="credentials">
+    <div class="cred-title">★ Учётные данные для входа ★</div>
+    <div class="cred-row">
+      <div class="cred-label">ID пользователя</div>
+      <div class="cred-value">${r.loginId}</div>
+    </div>
+    <div class="cred-row">
+      <div class="cred-label">Пароль</div>
+      <div class="cred-value">${row.password}</div>
+    </div>
+  </div>
+
+  <div class="warning">
+    <strong>Важно:</strong> храните учётные данные в защищённом месте. Не передавайте их третьим лицам.
+    При утере или компрометации пароля немедленно сообщите администратору проекта для перевыпуска доступа.
+  </div>
+
+  <div class="features">
+    <div class="features-title">Доступные функции в системе:</div>
+    <ul class="features-list">
+      ${r.features.map((f) => `<li>${f}</li>`).join("")}
+    </ul>
+  </div>
+
+  <div class="info-block">
+    <strong>Адрес входа:</strong> личный кабинет «ГлобалСтрой»<br>
+    <strong>Техническая поддержка:</strong> support@globalstroy.ru · +7 (XXX) XXX-XX-XX
+  </div>
+
+  <div class="signatures">
+    <div class="sign-block">
+      <div class="sign-label">Доступ выдал</div>
+      <div class="sign-name">Администратор системы</div>
+      <div class="sign-line">_______________ / подпись /</div>
+    </div>
+    <div class="sign-block">
+      <div class="sign-label">Доступ получил</div>
+      <div class="sign-name">${r.name}</div>
+      <div class="sign-line">_______________ / подпись /</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    ООО «ГлобалСтрой» · Уральская строительная компания · ${today}
+    <div class="slogan">«Качество доступное каждому»</div>
+  </div>
+
+  <script>
+    window.onload = function() {
+      setTimeout(function() { window.print(); }, 400);
+    };
+  </script>
+</body>
+</html>`;
+
+    const blob = new Blob([html], { type: "text/html;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+
+    // Открываем в новом окне для печати/сохранения PDF
+    const printWindow = window.open(url, "_blank");
+    if (!printWindow) {
+      // Fallback — скачать как файл
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `Доступ_${r.loginId}_${docNumber}.html`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+    setTimeout(() => URL.revokeObjectURL(url), 30000);
+  };
+
+  const issueAccess = (row: AccessRow) => {
     setRows((prev) =>
       prev.map((r) =>
-        r.role.id === id
+        r.role.id === row.role.id
           ? { ...r, status: "active", issuedTo: r.role.name }
           : r
       )
     );
+    // Автоматически генерируем документ
+    generateDocument(row);
   };
 
   const copyPassword = (id: string, password: string) => {
@@ -177,14 +334,23 @@ export default function AccessManagement() {
                       <Icon name="RefreshCw" size={12} flat />
                       Новый пароль
                     </button>
-                    {r.status === "pending" && (
+                    {r.status === "pending" ? (
                       <button
-                        onClick={() => issueAccess(r.role.id)}
+                        onClick={() => issueAccess(r)}
                         className="px-3 py-2 rounded-lg bg-build-orange hover:bg-orange-600 text-white text-xs font-semibold transition-all flex items-center gap-1.5"
-                        title="Выдать пользователю (после подписания документов)"
+                        title="Выдать и сгенерировать документ для подписания"
                       >
                         <Icon name="Send" size={12} flat />
-                        Выдать
+                        Выдать + PDF
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => generateDocument(r)}
+                        className="px-3 py-2 rounded-lg bg-white/5 hover:bg-blue-500/20 text-gray-300 hover:text-blue-300 text-xs font-medium transition-all flex items-center gap-1.5"
+                        title="Скачать документ повторно"
+                      >
+                        <Icon name="FileDown" size={12} flat />
+                        PDF
                       </button>
                     )}
                   </div>
@@ -206,9 +372,10 @@ export default function AccessManagement() {
         <Icon name="Info" size={16} flat className="text-blue-400 shrink-0 mt-0.5" />
         <div className="text-sm text-gray-300 leading-relaxed">
           <span className="text-blue-300 font-semibold">Регламент выдачи:</span>{" "}
-          Сгенерируйте пароль кнопкой «Новый пароль», скопируйте его, впишите в договор/акт о подключении к
-          личному кабинету и подпишите с пользователем. После этого нажмите «Выдать» — статус сменится на
-          «Активен», и пользователь сможет войти.
+          1) Нажмите «Новый пароль» — сгенерируется случайный пароль. 2) Нажмите «Выдать + PDF» — статус
+          сменится на «Активен» и автоматически откроется готовый акт выдачи доступа с ID, паролем и местами
+          для подписей. 3) Распечатайте или сохраните как PDF (Ctrl+P → Сохранить в PDF), подпишите с
+          пользователем и передайте ему документ.
         </div>
       </div>
     </div>
