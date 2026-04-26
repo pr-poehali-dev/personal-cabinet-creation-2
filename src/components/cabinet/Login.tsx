@@ -38,20 +38,6 @@ export default function Login({ onLogin }: LoginProps) {
           "radial-gradient(ellipse at center, #1a1a1a 0%, #0a0a0a 60%, #000000 100%)",
       }}
     >
-      {/* Неоновый слоган — три слова столбиком справа (в линию с карточками ролей) */}
-      <div className="absolute top-8 right-8 z-0 hidden xl:flex flex-col gap-2 items-end pointer-events-none opacity-90">
-        <div className="neon-slogan font-oswald text-2xl tracking-[0.18em] uppercase">Качество</div>
-        <div className="neon-slogan font-oswald text-2xl tracking-[0.18em] uppercase">доступное</div>
-        <div className="neon-slogan font-oswald text-2xl tracking-[0.18em] uppercase">каждому</div>
-      </div>
-
-      {/* Слоган для маленьких экранов — сверху по центру */}
-      <div className="absolute top-6 left-1/2 -translate-x-1/2 z-10 text-center px-4 xl:hidden">
-        <div className="neon-slogan font-oswald text-xl tracking-[0.2em] uppercase">
-          Качество доступное каждому
-        </div>
-      </div>
-
       <style>{`
         .neon-slogan {
           color: #fff;
@@ -61,7 +47,18 @@ export default function Login({ onLogin }: LoginProps) {
             0 0 6px #93c5fd,
             0 0 12px #60a5fa,
             0 0 22px #3b82f6;
-          animation: neonFlicker 4s ease-in-out infinite;
+        }
+        .neon-word {
+          display: inline-block;
+          opacity: 0;
+          transform: translateY(12px);
+          animation: wordFadeIn 0.9s ease-out forwards, neonFlicker 4s ease-in-out infinite 1.5s;
+        }
+        .neon-word:nth-child(1) { animation-delay: 0.2s, 1.5s; }
+        .neon-word:nth-child(2) { animation-delay: 0.6s, 1.9s; }
+        .neon-word:nth-child(3) { animation-delay: 1.0s, 2.3s; }
+        @keyframes wordFadeIn {
+          to { opacity: 1; transform: translateY(0); }
         }
         @keyframes neonFlicker {
           0%, 100% {
@@ -70,15 +67,13 @@ export default function Login({ onLogin }: LoginProps) {
               0 0 6px #93c5fd,
               0 0 12px #60a5fa,
               0 0 22px #3b82f6;
-            opacity: 1;
           }
           50% {
             text-shadow:
               0 0 4px #fff,
-              0 0 10px #93c5fd,
-              0 0 20px #60a5fa,
-              0 0 32px #3b82f6;
-            opacity: 0.95;
+              0 0 12px #93c5fd,
+              0 0 22px #60a5fa,
+              0 0 36px #3b82f6;
           }
         }
       `}</style>
@@ -248,6 +243,15 @@ export default function Login({ onLogin }: LoginProps) {
                 0 0 48px rgba(30, 58, 138, 0.25);
             }
           `}</style>
+
+          {/* Слоган под карточками ролей */}
+          <div className="mt-10 text-center">
+            <div className="neon-slogan font-oswald text-2xl md:text-3xl tracking-[0.25em] uppercase leading-relaxed">
+              <span className="neon-word">Качество</span>{" "}
+              <span className="neon-word">доступное</span>{" "}
+              <span className="neon-word">каждому</span>
+            </div>
+          </div>
         </div>
       </div>
       <VersionBadge />
