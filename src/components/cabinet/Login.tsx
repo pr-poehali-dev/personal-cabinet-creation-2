@@ -73,46 +73,79 @@ export default function Login({ onLogin }: LoginProps) {
           to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Синий бегущий луч по периметру — появляется при наведении */
+        /* Прозрачные карточки + белый фон с blur */
         .role-card,
         .login-card {
           isolation: isolate;
           background: rgba(255, 255, 255, 0.85) !important;
           backdrop-filter: blur(8px);
         }
-        .role-card::before,
-        .login-card::before {
+
+        /* Синий бегущий луч на карточках ролей при hover */
+        .role-card::before {
           content: "";
           position: absolute;
-          inset: 0;
+          inset: -2px;
           border-radius: inherit;
-          padding: 1.5px;
+          padding: 2.5px;
           background: conic-gradient(
             from var(--gs-angle, 0deg),
             transparent 0%,
-            transparent 70%,
-            #60a5fa 80%,
-            #93c5fd 88%,
-            #3b82f6 95%,
+            transparent 65%,
+            #3b82f6 75%,
+            #93c5fd 82%,
+            #ffffff 88%,
+            #60a5fa 94%,
             transparent 100%
           );
           -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
           mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
           -webkit-mask-composite: xor;
           mask-composite: exclude;
-          animation: borderRotate 3s linear infinite;
+          animation: borderRotate 2.5s linear infinite;
           opacity: 0;
           transition: opacity 0.4s ease;
           pointer-events: none;
+          filter: drop-shadow(0 0 8px #60a5fa) drop-shadow(0 0 16px #3b82f6);
         }
-        .role-card:hover::before,
-        .login-card:hover::before {
+        .role-card:hover::before {
           opacity: 1;
         }
         .role-card:hover {
           box-shadow:
-            0 0 18px rgba(96, 165, 250, 0.35),
-            0 0 36px rgba(59, 130, 246, 0.2);
+            0 0 30px rgba(59, 130, 246, 0.55),
+            0 0 60px rgba(96, 165, 250, 0.35),
+            0 0 90px rgba(30, 58, 138, 0.25);
+        }
+
+        /* Оранжевое свечение кнопки "Войти" */
+        .login-btn {
+          position: relative;
+          isolation: isolate;
+          background: linear-gradient(135deg, #6B7C90 0%, #1A2D4D 100%);
+          transition: all 0.3s ease;
+        }
+        .login-btn::after {
+          content: "";
+          position: absolute;
+          inset: -3px;
+          border-radius: inherit;
+          background: linear-gradient(135deg, #FCDD2B, #F77D00);
+          z-index: -1;
+          opacity: 0;
+          filter: blur(12px);
+          transition: opacity 0.4s ease;
+        }
+        .login-btn:hover {
+          background: linear-gradient(135deg, #F77D00 0%, #FCDD2B 100%);
+          color: #1A2D4D !important;
+          box-shadow:
+            0 0 24px rgba(247, 125, 0, 0.7),
+            0 0 48px rgba(252, 221, 43, 0.5),
+            0 0 80px rgba(247, 125, 0, 0.3);
+        }
+        .login-btn:hover::after {
+          opacity: 1;
         }
       `}</style>
 
@@ -183,8 +216,7 @@ export default function Login({ onLogin }: LoginProps) {
               )}
               <button
                 type="submit"
-                className="w-full py-3 text-white font-bold rounded-lg transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] shadow-md hover:shadow-lg tracking-[0.15em]"
-                style={{ background: "linear-gradient(135deg, #6B7C90 0%, #1A2D4D 100%)" }}
+                className="login-btn w-full py-3 text-white font-bold rounded-lg hover:scale-[1.01] active:scale-[0.99] tracking-[0.15em]"
               >
                 ВОЙТИ В КАБИНЕТ
               </button>
