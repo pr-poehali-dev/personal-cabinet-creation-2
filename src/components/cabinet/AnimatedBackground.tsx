@@ -1,6 +1,3 @@
-const LOGO_URL =
-  "https://cdn.poehali.dev/projects/13dba3bf-6323-4724-9f70-0455e15a1ea0/bucket/e86a33ff-bcc0-41ee-ad09-efce63f6f6e6.png";
-
 export default function AnimatedBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -19,16 +16,6 @@ export default function AnimatedBackground() {
 
       {/* Сканирующий световой луч */}
       <div className="scan-beam" />
-
-      {/* Летающие логотипы ГлобалСтрой */}
-      <div className="absolute inset-0">
-        {Array.from({ length: 9 }).map((_, i) => (
-          <div key={i} className={`floating-logo logo-${i + 1}`}>
-            <div className="logo-glow" />
-            <img src={LOGO_URL} alt="" className="logo-img" />
-          </div>
-        ))}
-      </div>
 
       {/* Светящиеся орбы — энергоисточники */}
       <div className="absolute top-1/4 left-1/3 w-[500px] h-[500px] rounded-full bg-blue-600/20 blur-3xl animate-orb-1" />
@@ -95,59 +82,6 @@ export default function AnimatedBackground() {
         @keyframes scanY {
           0%, 100% { transform: translateY(-20%); opacity: 0; }
           50%      { transform: translateY(100vh); opacity: 1; }
-        }
-
-        /* Летающие логотипы */
-        .floating-logo {
-          position: absolute;
-          width: 70px;
-          height: 70px;
-          animation: floatLogo 22s ease-in-out infinite;
-          will-change: transform;
-        }
-        .logo-img {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-          filter:
-            drop-shadow(0 0 12px rgba(59, 130, 246, 0.85))
-            drop-shadow(0 0 24px rgba(96, 165, 250, 0.5))
-            drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
-          animation: logoSpin 18s linear infinite;
-        }
-        .logo-glow {
-          position: absolute;
-          inset: -30%;
-          border-radius: 50%;
-          background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, transparent 60%);
-          filter: blur(12px);
-          animation: glowPulse 4s ease-in-out infinite;
-        }
-
-        .logo-1  { top: 8%;   left: 6%;   animation-duration: 22s; animation-delay: 0s;   transform: scale(0.7); }
-        .logo-2  { top: 18%;  left: 78%;  animation-duration: 28s; animation-delay: -3s;  transform: scale(1.1); }
-        .logo-3  { top: 58%;  left: 8%;   animation-duration: 25s; animation-delay: -6s;  transform: scale(0.55); }
-        .logo-4  { top: 72%;  left: 72%;  animation-duration: 30s; animation-delay: -10s; transform: scale(1.3); }
-        .logo-5  { top: 38%;  left: 48%;  animation-duration: 35s; animation-delay: -2s;  transform: scale(0.85); }
-        .logo-6  { top: 82%;  left: 28%;  animation-duration: 24s; animation-delay: -8s;  transform: scale(1.0); }
-        .logo-7  { top: 4%;   left: 42%;  animation-duration: 32s; animation-delay: -5s;  transform: scale(0.65); }
-        .logo-8  { top: 48%;  left: 88%;  animation-duration: 27s; animation-delay: -12s; transform: scale(0.95); }
-        .logo-9  { top: 28%;  left: 22%;  animation-duration: 26s; animation-delay: -7s;  transform: scale(0.75); }
-
-        @keyframes floatLogo {
-          0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
-          25%      { transform: translate3d(50px, -40px, 0) rotate(8deg); }
-          50%      { transform: translate3d(-30px, -70px, 0) rotate(-5deg); }
-          75%      { transform: translate3d(-60px, -30px, 0) rotate(4deg); }
-        }
-        @keyframes logoSpin {
-          0%   { filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.85)) drop-shadow(0 0 24px rgba(96, 165, 250, 0.5)); }
-          50%  { filter: drop-shadow(0 0 18px rgba(96, 165, 250, 1))    drop-shadow(0 0 36px rgba(59, 130, 246, 0.7)); }
-          100% { filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.85)) drop-shadow(0 0 24px rgba(96, 165, 250, 0.5)); }
-        }
-        @keyframes glowPulse {
-          0%, 100% { opacity: 0.5; transform: scale(1); }
-          50%      { opacity: 1;   transform: scale(1.3); }
         }
 
         @keyframes orb1 {
