@@ -17,19 +17,21 @@ export default function Sidebar({ active, setActive, sidebarOpen, setSidebarOpen
   return (
     <>
       <aside
-        className={`fixed lg:static z-40 h-full w-64 bg-[#111111] border-r border-build-border flex flex-col transition-transform duration-300 ${
+        className={`fixed lg:static z-40 h-full w-64 bg-[#0B1E3F] border-r border-build-border flex flex-col transition-transform duration-300 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
         {/* Logo */}
         <div className="px-6 py-5 border-b border-build-border">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-build-orange flex items-center justify-center animate-pulse-orange">
-              <Icon name="HardHat" size={18} className="text-white" />
-            </div>
-            <div>
-              <div className="font-oswald text-white text-lg font-semibold tracking-wide leading-none">СТРОЙ</div>
-              <div className="font-oswald text-build-orange text-xs tracking-[0.2em] uppercase">Кабинет</div>
+            <img
+              src="https://cdn.poehali.dev/projects/13dba3bf-6323-4724-9f70-0455e15a1ea0/bucket/7719efe9-a05d-4249-9854-bebb3bda6cae.png"
+              alt="ГлобалСтрой"
+              className="w-10 h-10 rounded-lg bg-white object-contain p-1 shrink-0"
+            />
+            <div className="min-w-0">
+              <div className="font-oswald text-white text-base font-semibold tracking-wide leading-none truncate">ГлобалСтрой</div>
+              <div className="text-gs-accent text-[10px] tracking-[0.15em] uppercase mt-1.5">Уральская СК</div>
             </div>
           </div>
         </div>

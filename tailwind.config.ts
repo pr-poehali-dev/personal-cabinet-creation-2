@@ -24,11 +24,15 @@ export default {
 				golos: ['Golos Text', 'sans-serif'],
 			},
 			colors: {
-				'build-orange': '#FF6B00',
-				'build-yellow': '#FFB800',
-				'build-dark': '#0D0D0D',
-				'build-card': '#161616',
-				'build-border': '#2A2A2A',
+				'build-orange': '#1E3A8A',
+				'build-yellow': '#3B5FBF',
+				'build-dark': '#0A1628',
+				'build-card': '#0F1F3D',
+				'build-border': '#1E3559',
+				'gs-navy': '#0B1E3F',
+				'gs-blue': '#1E3A8A',
+				'gs-accent': '#3B5FBF',
+				'gs-light': '#E8EEF7',
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
@@ -114,8 +118,8 @@ export default {
 					to: { opacity: '1', transform: 'translateY(0)' },
 				},
 				pulseOrange: {
-					'0%, 100%': { boxShadow: '0 0 0 0 rgba(255,107,0,0.4)' },
-					'50%': { boxShadow: '0 0 0 8px rgba(255,107,0,0)' },
+					'0%, 100%': { boxShadow: '0 0 0 0 rgba(30,58,138,0.5)' },
+					'50%': { boxShadow: '0 0 0 8px rgba(30,58,138,0)' },
 				},
 			}
 		}

@@ -32,7 +32,7 @@ export const roles: Role[] = [
     fullName: "Главный инженер проекта",
     shortName: "ГИП",
     icon: "HardHat",
-    color: "#FF6B00",
+    color: "#1E3A8A",
     description: "Полный доступ ко всем разделам, управление командой и бюджетом",
     sections: ["dashboard", "projects", "tasks", "team", "finances", "documents", "calendar", "analytics"],
     features: [

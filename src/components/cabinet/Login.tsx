@@ -46,12 +46,14 @@ export default function Login({ onLogin }: LoginProps) {
         {/* Left - login form */}
         <div className="bg-build-card border border-build-border rounded-3xl p-8 backdrop-blur">
           <div className="flex items-center gap-3 mb-8">
-            <div className="w-12 h-12 rounded-xl bg-build-orange flex items-center justify-center animate-pulse-orange">
-              <Icon name="HardHat" size={24} className="text-white" />
-            </div>
+            <img
+              src="https://cdn.poehali.dev/projects/13dba3bf-6323-4724-9f70-0455e15a1ea0/bucket/7719efe9-a05d-4249-9854-bebb3bda6cae.png"
+              alt="ГлобалСтрой"
+              className="w-14 h-14 rounded-xl bg-white object-contain p-1.5"
+            />
             <div>
-              <div className="font-oswald text-white text-2xl font-bold tracking-wide leading-none">СТРОЙ</div>
-              <div className="font-oswald text-build-orange text-xs tracking-[0.2em] uppercase mt-1">Кабинет</div>
+              <div className="font-oswald text-white text-2xl font-bold tracking-wide leading-none">ГлобалСтрой</div>
+              <div className="text-gs-accent text-[11px] tracking-[0.2em] uppercase mt-1.5">Уральская строительная компания</div>
             </div>
           </div>
 
