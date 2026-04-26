@@ -6,9 +6,51 @@ interface IconProps extends LucideProps {
   name: string;
   fallback?: string;
   flat?: boolean;
+  variant?: 'blue' | 'green' | 'orange' | 'purple' | 'red' | 'gold' | 'teal';
 }
 
-const Icon: React.FC<IconProps> = ({ name, fallback = 'CircleAlert', flat = false, size = 24, className = '', style, ...props }) => {
+// Семантическое распределение цветов 3D-иконок по смыслу
+const variantByName: Record<string, IconProps['variant']> = {
+  // Деньги / финансы / рост — зелёный
+  Wallet: 'green', CircleDollarSign: 'green', TrendingUp: 'green', CreditCard: 'green',
+  Percent: 'green', ArrowDownLeft: 'green', Handshake: 'green', BarChart3: 'green',
+  Target: 'green', Coins: 'green', Banknote: 'green', CheckCircle: 'green', Check: 'green',
+
+  // Стройка / срочное / время — оранжевый
+  AlertTriangle: 'orange', Clock: 'orange', Timer: 'orange', HardHat: 'orange',
+  Bell: 'orange', Flame: 'orange', Hammer: 'orange', Shovel: 'orange',
+  Wrench: 'orange', PencilRuler: 'orange', PackagePlus: 'orange', Truck: 'orange',
+  Warehouse: 'orange', Package: 'orange',
+
+  // Аналитика / документы — фиолетовый
+  BarChart: 'purple', LineChart: 'purple', PieChart: 'purple', Brain: 'purple',
+  FolderOpen: 'purple', FileText: 'purple', BookOpen: 'purple', FileSpreadsheet: 'purple',
+  FileCode: 'purple', FileSignature: 'purple', FileCheck: 'purple', FileImage: 'purple',
+  ClipboardList: 'purple', ClipboardCheck: 'purple', CheckSquare: 'purple',
+
+  // Опасность / удалить / расходы — красный
+  Trash2: 'red', AlertCircle: 'red', ArrowUpRight: 'red', TrendingDown: 'red',
+  EyeOff: 'red',
+
+  // Защита / ключи / награды — золотой
+  ShieldCheck: 'gold', Shield: 'gold', KeyRound: 'gold', Key: 'gold',
+  Award: 'gold', Star: 'gold', Crown: 'gold',
+
+  // Связь / сообщения / медиа — бирюзовый
+  MessageCircle: 'teal', MessageSquare: 'teal', Phone: 'teal', Mail: 'teal',
+  Send: 'teal', Camera: 'teal', Video: 'teal', UserPlus: 'teal', Contact: 'teal',
+};
+
+const Icon: React.FC<IconProps> = ({
+  name,
+  fallback = 'CircleAlert',
+  flat = false,
+  variant,
+  size = 24,
+  className = '',
+  style,
+  ...props
+}) => {
   const IconComponent = (LucideIcons as Record<string, React.FC<LucideProps>>)[name];
   const Resolved = IconComponent
     || (LucideIcons as Record<string, React.FC<LucideProps>>)[fallback];
@@ -17,7 +59,6 @@ const Icon: React.FC<IconProps> = ({ name, fallback = 'CircleAlert', flat = fals
     return <span className="text-xs text-gray-400">[icon]</span>;
   }
 
-  // Плоский режим — оригинальная иконка без обёртки (для меню)
   if (flat) {
     return <Resolved size={size} className={className} style={style} {...props} />;
   }
@@ -25,10 +66,11 @@ const Icon: React.FC<IconProps> = ({ name, fallback = 'CircleAlert', flat = fals
   const numericSize = typeof size === 'number' ? size : parseInt(size as string, 10) || 24;
   const wrapperSize = Math.round(numericSize * 1.6);
   const innerSize = Math.round(numericSize * 0.85);
+  const finalVariant = variant || variantByName[name] || 'blue';
 
   return (
     <span
-      className={`icon-3d ${className}`}
+      className={`icon-3d icon-3d--${finalVariant} ${className}`}
       style={{
         width: wrapperSize,
         height: wrapperSize,

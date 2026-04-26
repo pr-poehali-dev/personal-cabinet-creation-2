@@ -22,16 +22,16 @@ export default function Sidebar({ active, setActive, sidebarOpen, setSidebarOpen
         }`}
       >
         {/* Logo */}
-        <div className="px-6 py-5 border-b border-build-border">
+        <div className="px-5 py-5 border-b border-build-border bg-white/95">
           <div className="flex items-center gap-3">
             <img
               src="https://cdn.poehali.dev/projects/13dba3bf-6323-4724-9f70-0455e15a1ea0/bucket/7719efe9-a05d-4249-9854-bebb3bda6cae.png"
               alt="ГлобалСтрой"
-              className="w-10 h-10 rounded-lg bg-white object-contain p-1 shrink-0"
+              className="w-12 h-12 object-contain shrink-0"
             />
             <div className="min-w-0">
-              <div className="font-oswald text-white text-base font-semibold tracking-wide leading-none truncate">ГлобалСтрой</div>
-              <div className="text-gs-accent text-[9px] tracking-[0.15em] uppercase mt-1.5 leading-tight">Безопасное качество<br/>доступное каждому</div>
+              <div className="font-golos text-[#0B1E3F] text-base font-bold tracking-tight leading-none truncate">ГлобалСтрой</div>
+              <div className="text-[#1E3A8A] text-[9px] tracking-[0.12em] uppercase mt-1.5 leading-tight font-golos font-semibold">Безопасное качество<br/>доступное каждому</div>
             </div>
           </div>
         </div>
@@ -89,6 +89,20 @@ export default function Sidebar({ active, setActive, sidebarOpen, setSidebarOpen
             <Icon name="LogOut" size={12} flat />
             Выйти
           </button>
+
+          {/* Заметка версии для разработки */}
+          <div className="mt-3 pt-3 border-t border-build-border/50">
+            <div className="text-[10px] text-gray-500 leading-snug font-mono">
+              <div className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                <span className="text-gray-400 font-semibold">v1.7</span>
+              </div>
+              <div className="text-gray-600 mt-1 leading-tight">
+                Логотип + 3D-иконки<br/>
+                цветовое разделение
+              </div>
+            </div>
+          </div>
         </div>
       </aside>
 

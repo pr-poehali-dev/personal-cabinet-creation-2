@@ -44,18 +44,28 @@ export default function Login({ onLogin }: LoginProps) {
         </div>
       </div>
 
+      {/* Заметка версии */}
+      <div className="absolute bottom-4 left-4 z-10 text-[10px] font-mono text-gray-500 bg-build-card/80 backdrop-blur border border-build-border rounded-lg px-3 py-2">
+        <div className="flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+          <span className="text-gray-300 font-semibold">v1.7</span>
+          <span className="text-gray-600">·</span>
+          <span>Логотип + цвета иконок</span>
+        </div>
+      </div>
+
       <div className="relative z-10 w-full max-w-5xl grid lg:grid-cols-2 gap-8 items-center mt-20 lg:mt-12">
         {/* Left - login form */}
         <div className="bg-build-card border border-build-border rounded-3xl p-8 backdrop-blur">
-          <div className="flex items-center gap-3 mb-8">
+          <div className="flex items-center gap-4 mb-8 p-4 rounded-2xl bg-white/95 shadow-lg">
             <img
               src="https://cdn.poehali.dev/projects/13dba3bf-6323-4724-9f70-0455e15a1ea0/bucket/7719efe9-a05d-4249-9854-bebb3bda6cae.png"
               alt="ГлобалСтрой"
-              className="w-14 h-14 rounded-xl bg-white object-contain p-1.5"
+              className="w-16 h-16 object-contain"
             />
             <div>
-              <div className="font-oswald text-white text-2xl font-bold tracking-wide leading-none">ГлобалСтрой</div>
-              <div className="text-gs-accent text-[11px] tracking-[0.2em] uppercase mt-1.5">Уральская строительная компания</div>
+              <div className="font-golos text-[#0B1E3F] text-2xl font-bold tracking-tight leading-none">ГлобалСтрой</div>
+              <div className="text-[#1E3A8A] text-[11px] tracking-[0.15em] uppercase mt-2 font-semibold">Уральская строительная компания</div>
             </div>
           </div>
 

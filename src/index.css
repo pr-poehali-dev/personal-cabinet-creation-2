@@ -189,6 +189,100 @@
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
+  /* === Цветовые варианты иконок по смыслу === */
+  .icon-3d--green .icon-3d__plate {
+    background: linear-gradient(155deg, #4ade80 0%, #16a34a 45%, #14532d 100%);
+    box-shadow:
+      inset 0 1.5px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -2px 0 rgba(0, 0, 0, 0.35),
+      0 4px 10px rgba(20, 83, 45, 0.55);
+  }
+  .icon-3d--orange .icon-3d__plate {
+    background: linear-gradient(155deg, #fbbf24 0%, #f97316 45%, #9a3412 100%);
+    box-shadow:
+      inset 0 1.5px 0 rgba(255, 255, 255, 0.45),
+      inset 0 -2px 0 rgba(0, 0, 0, 0.35),
+      0 4px 10px rgba(154, 52, 18, 0.55);
+  }
+  .icon-3d--purple .icon-3d__plate {
+    background: linear-gradient(155deg, #c084fc 0%, #9333ea 45%, #4c1d95 100%);
+    box-shadow:
+      inset 0 1.5px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -2px 0 rgba(0, 0, 0, 0.35),
+      0 4px 10px rgba(76, 29, 149, 0.55);
+  }
+  .icon-3d--red .icon-3d__plate {
+    background: linear-gradient(155deg, #fca5a5 0%, #ef4444 45%, #7f1d1d 100%);
+    box-shadow:
+      inset 0 1.5px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -2px 0 rgba(0, 0, 0, 0.35),
+      0 4px 10px rgba(127, 29, 29, 0.55);
+  }
+  .icon-3d--gold .icon-3d__plate {
+    background: linear-gradient(155deg, #fde68a 0%, #eab308 45%, #713f12 100%);
+    box-shadow:
+      inset 0 1.5px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -2px 0 rgba(0, 0, 0, 0.35),
+      0 4px 10px rgba(113, 63, 18, 0.55);
+  }
+  .icon-3d--teal .icon-3d__plate {
+    background: linear-gradient(155deg, #5eead4 0%, #0d9488 45%, #134e4a 100%);
+    box-shadow:
+      inset 0 1.5px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -2px 0 rgba(0, 0, 0, 0.35),
+      0 4px 10px rgba(19, 78, 74, 0.55);
+  }
+
+  /* Hover-усиления для каждого цвета */
+  button:hover .icon-3d--green .icon-3d__plate,
+  .group:hover .icon-3d--green .icon-3d__plate,
+  .icon-3d--green:hover .icon-3d__plate {
+    background: linear-gradient(155deg, #86efac 0%, #22c55e 45%, #16a34a 100%);
+    box-shadow:
+      0 8px 18px rgba(34, 197, 94, 0.55),
+      0 0 30px rgba(74, 222, 128, 0.45);
+  }
+  button:hover .icon-3d--orange .icon-3d__plate,
+  .group:hover .icon-3d--orange .icon-3d__plate,
+  .icon-3d--orange:hover .icon-3d__plate {
+    background: linear-gradient(155deg, #fcd34d 0%, #fb923c 45%, #ea580c 100%);
+    box-shadow:
+      0 8px 18px rgba(251, 146, 60, 0.6),
+      0 0 30px rgba(252, 211, 77, 0.5);
+  }
+  button:hover .icon-3d--purple .icon-3d__plate,
+  .group:hover .icon-3d--purple .icon-3d__plate,
+  .icon-3d--purple:hover .icon-3d__plate {
+    background: linear-gradient(155deg, #d8b4fe 0%, #a855f7 45%, #7e22ce 100%);
+    box-shadow:
+      0 8px 18px rgba(168, 85, 247, 0.55),
+      0 0 30px rgba(216, 180, 254, 0.45);
+  }
+  button:hover .icon-3d--red .icon-3d__plate,
+  .group:hover .icon-3d--red .icon-3d__plate,
+  .icon-3d--red:hover .icon-3d__plate {
+    background: linear-gradient(155deg, #fecaca 0%, #f87171 45%, #dc2626 100%);
+    box-shadow:
+      0 8px 18px rgba(239, 68, 68, 0.55),
+      0 0 30px rgba(252, 165, 165, 0.45);
+  }
+  button:hover .icon-3d--gold .icon-3d__plate,
+  .group:hover .icon-3d--gold .icon-3d__plate,
+  .icon-3d--gold:hover .icon-3d__plate {
+    background: linear-gradient(155deg, #fef08a 0%, #facc15 45%, #ca8a04 100%);
+    box-shadow:
+      0 8px 18px rgba(250, 204, 21, 0.6),
+      0 0 30px rgba(254, 240, 138, 0.55);
+  }
+  button:hover .icon-3d--teal .icon-3d__plate,
+  .group:hover .icon-3d--teal .icon-3d__plate,
+  .icon-3d--teal:hover .icon-3d__plate {
+    background: linear-gradient(155deg, #99f6e4 0%, #14b8a6 45%, #0f766e 100%);
+    box-shadow:
+      0 8px 18px rgba(20, 184, 166, 0.55),
+      0 0 30px rgba(153, 246, 228, 0.45);
+  }
+
   /* Стеклянный блик сверху-слева */
   .icon-3d__highlight {
     position: absolute;
