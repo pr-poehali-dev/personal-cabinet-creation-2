@@ -40,7 +40,12 @@ export default function Index() {
       />
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden relative z-10">
-        <header className="bg-[#0F1F3D]/80 backdrop-blur-md border-b border-build-border px-6 py-4 flex items-center gap-4 shrink-0">
+        <header
+          className="backdrop-blur-md border-b border-build-border px-6 py-4 flex items-center gap-4 shrink-0 relative"
+          style={{ background: "linear-gradient(135deg, rgba(26,45,77,0.95) 0%, rgba(58,76,103,0.85) 100%)" }}
+        >
+          {/* Жёлтая декоративная полоса снизу */}
+          <div className="absolute bottom-0 left-0 w-24 h-0.5 bg-gs-yellow" />
           <button className="lg:hidden text-gray-400 hover:text-white" onClick={() => setSidebarOpen(true)}>
             <Icon name="Menu" size={22} />
           </button>
@@ -58,7 +63,7 @@ export default function Index() {
             {canCreateProject && (
               <button
                 onClick={() => setCreateOpen(true)}
-                className="px-4 py-2 bg-build-orange hover:bg-orange-600 text-white text-sm font-semibold rounded-lg transition-all duration-200 flex items-center gap-2 hover:scale-105 active:scale-95"
+                className="px-4 py-2 bg-gs-yellow hover:bg-gs-orange text-gs-navy hover:text-white text-sm font-bold rounded-lg transition-all duration-200 flex items-center gap-2 hover:scale-105 active:scale-95 shadow-md"
               >
                 <Icon name="Plus" size={16} />
                 Новый проект

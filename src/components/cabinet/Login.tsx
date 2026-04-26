@@ -36,223 +36,160 @@ export default function Login({ onLogin }: LoginProps) {
 
   return (
     <div
-      className="min-h-screen font-golos flex items-center justify-center p-4 relative overflow-hidden"
+      className="min-h-screen font-inter flex items-center justify-center p-4 relative overflow-hidden"
       style={{
         background:
-          "radial-gradient(ellipse at center, #1a1a1a 0%, #0a0a0a 60%, #000000 100%)",
+          "radial-gradient(ellipse at top left, #3A4C67 0%, transparent 55%), radial-gradient(ellipse at bottom right, #6B7C90 0%, transparent 55%), linear-gradient(135deg, #1A2D4D 0%, #0F1E33 100%)",
       }}
     >
+      {/* Жёлтая декоративная полоса слева — брендовый акцент */}
+      <div className="absolute top-0 left-0 w-1.5 h-full bg-gs-yellow z-20" />
       <style>{`
         .neon-slogan {
-          color: #fff;
+          color: #FCDD2B;
           font-weight: 300;
-          text-shadow:
-            0 0 2px #fff,
-            0 0 6px #93c5fd,
-            0 0 12px #60a5fa,
-            0 0 22px #3b82f6;
+          letter-spacing: 0.25em;
         }
         .neon-word {
           display: inline-block;
           opacity: 0;
           transform: translateY(12px);
-          animation: wordFadeIn 0.9s ease-out forwards, neonFlicker 4s ease-in-out infinite 1.5s;
+          animation: wordFadeIn 0.9s ease-out forwards;
         }
-        .neon-word:nth-child(1) { animation-delay: 0.2s, 1.5s; }
-        .neon-word:nth-child(2) { animation-delay: 0.6s, 1.9s; }
-        .neon-word:nth-child(3) { animation-delay: 1.0s, 2.3s; }
+        .neon-word:nth-child(1) { animation-delay: 0.2s; }
+        .neon-word:nth-child(2) { animation-delay: 0.6s; color: #fff; }
+        .neon-word:nth-child(3) { animation-delay: 1.0s; color: #F77D00; }
         @keyframes wordFadeIn {
           to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes neonFlicker {
-          0%, 100% {
-            text-shadow:
-              0 0 2px #fff,
-              0 0 6px #93c5fd,
-              0 0 12px #60a5fa,
-              0 0 22px #3b82f6;
-          }
-          50% {
-            text-shadow:
-              0 0 4px #fff,
-              0 0 12px #93c5fd,
-              0 0 22px #60a5fa,
-              0 0 36px #3b82f6;
-          }
         }
       `}</style>
 
       {/* Центрированная форма входа */}
       <div className="relative z-10 w-full max-w-7xl grid lg:grid-cols-[1fr_1.1fr] gap-10 items-center justify-items-center mx-auto">
         {/* Left - login form */}
-        <div className="bg-[#111111]/90 border border-white/10 rounded-3xl p-10 backdrop-blur-md shadow-2xl w-full max-w-md">
-          {/* Большой логотип с тонкой светящейся обводкой */}
-          <div className="flex flex-col items-center mb-8">
-            <div className="logo-outline-glow relative w-44 h-44 rounded-3xl flex items-center justify-center mb-5">
-              <img
-                src="https://cdn.poehali.dev/projects/13dba3bf-6323-4724-9f70-0455e15a1ea0/bucket/e86a33ff-bcc0-41ee-ad09-efce63f6f6e6.png"
-                alt="ГлобалСтрой"
-                className="w-32 h-32 object-contain relative z-10"
-                style={{ filter: "drop-shadow(0 0 14px rgba(96,165,250,0.55))" }}
-              />
-            </div>
-            <div className="text-center">
-              <div className="font-oswald text-white text-3xl font-bold tracking-wide leading-none">ГлобалСтрой</div>
-              <div className="text-gs-accent text-[11px] tracking-[0.25em] uppercase mt-2 font-semibold">Уральская строительная компания</div>
+        <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden">
+          {/* Шапка с фирменным градиентом */}
+          <div
+            className="px-8 pt-8 pb-7 relative"
+            style={{ background: "linear-gradient(135deg, #6B7C90 0%, #1A2D4D 100%)" }}
+          >
+            {/* Жёлтый акцент */}
+            <div className="absolute top-0 right-0 w-24 h-1.5 bg-gs-yellow" />
+
+            <div className="flex flex-col items-center">
+              <div className="bg-white rounded-2xl p-3 mb-4 shadow-lg">
+                <img
+                  src="https://cdn.poehali.dev/projects/13dba3bf-6323-4724-9f70-0455e15a1ea0/bucket/e86a33ff-bcc0-41ee-ad09-efce63f6f6e6.png"
+                  alt="ГлобалСтрой"
+                  className="w-24 h-24 object-contain"
+                />
+              </div>
+              <div className="text-center">
+                <div className="font-inter text-white text-2xl font-extrabold tracking-tight leading-none">ГЛОБАЛСТРОЙ</div>
+                <div className="text-gs-yellow text-[10px] tracking-[0.25em] uppercase mt-2 font-semibold">Уральская строительная компания</div>
+              </div>
             </div>
           </div>
 
-          <h1 className="font-oswald text-white text-2xl font-bold mb-2 text-center">Вход в систему</h1>
-          <p className="text-gray-400 text-sm mb-6 text-center">
-            Выберите роль справа — ID подставится. Пароль выдаётся администратором при подписании документов.
-          </p>
-
-          <style>{`
-            .logo-outline-glow::before {
-              content: "";
-              position: absolute;
-              inset: 0;
-              border-radius: 1.5rem;
-              padding: 1px;
-              background: conic-gradient(
-                from var(--gs-angle, 0deg),
-                rgba(59, 130, 246, 0.1) 0%,
-                #60a5fa 25%,
-                #93c5fd 50%,
-                #3b82f6 75%,
-                rgba(59, 130, 246, 0.1) 100%
-              );
-              -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-              mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-              -webkit-mask-composite: xor;
-              mask-composite: exclude;
-              animation: borderRotate 6s linear infinite;
-              pointer-events: none;
-            }
-            .logo-outline-glow::after {
-              content: "";
-              position: absolute;
-              inset: -2px;
-              border-radius: 1.5rem;
-              box-shadow:
-                0 0 22px rgba(59, 130, 246, 0.35),
-                inset 0 0 30px rgba(59, 130, 246, 0.12);
-              pointer-events: none;
-            }
-          `}</style>
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="text-gray-400 text-xs uppercase tracking-wider mb-2 block">ID пользователя</label>
-              <div className="relative">
-                <Icon name="User" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
-                <input
-                  value={loginId}
-                  onChange={(e) => setLoginId(e.target.value)}
-                  placeholder="например, gip-001"
-                  className="w-full bg-white/5 border border-build-border rounded-lg pl-10 pr-3 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-build-orange transition-colors"
-                />
-              </div>
+          {/* Контент формы */}
+          <div className="p-8">
+            <div className="border-l-4 border-gs-yellow pl-3 mb-5">
+              <h1 className="font-inter text-gs-navy text-xl font-extrabold leading-tight">Вход в систему</h1>
+              <p className="text-gs-gray text-xs mt-1.5">
+                Выберите роль справа — ID подставится автоматически. Пароль выдаётся администратором при подписании документов.
+              </p>
             </div>
-            <div>
-              <label className="text-gray-400 text-xs uppercase tracking-wider mb-2 block">Пароль</label>
-              <div className="relative">
-                <Icon name="Lock" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••"
-                  className="w-full bg-white/5 border border-build-border rounded-lg pl-10 pr-3 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-build-orange transition-colors"
-                />
-              </div>
-            </div>
-            {error && (
-              <div className="text-red-400 text-sm flex items-center gap-2 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
-                <Icon name="AlertCircle" size={14} />
-                {error}
-              </div>
-            )}
-            <button
-              type="submit"
-              className="w-full py-3 bg-build-orange hover:bg-orange-600 text-white font-semibold rounded-lg transition-all duration-200 flex items-center justify-center gap-2 hover:scale-[1.01] active:scale-[0.99]"
-            >
-              <Icon name="LogIn" size={18} />
-              Войти в кабинет
-            </button>
-          </form>
 
-          <div className="mt-6 pt-6 border-t border-build-border text-center">
-            <p className="text-gray-500 text-xs">Забыли ID? Обратитесь к администратору проекта</p>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="text-gs-gray text-[11px] uppercase tracking-[0.15em] mb-1.5 block font-semibold">ID пользователя</label>
+                <div className="relative">
+                  <Icon name="User" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gs-gray" />
+                  <input
+                    value={loginId}
+                    onChange={(e) => setLoginId(e.target.value)}
+                    placeholder="например, gip-001"
+                    className="w-full bg-gs-light border border-gs-gray/30 rounded-lg pl-10 pr-3 py-2.5 text-gs-navy placeholder-gs-gray/60 focus:outline-none focus:border-gs-navy focus:bg-white transition-all font-mono text-sm"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-gs-gray text-[11px] uppercase tracking-[0.15em] mb-1.5 block font-semibold">Пароль</label>
+                <div className="relative">
+                  <Icon name="Lock" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gs-gray" />
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="••••"
+                    className="w-full bg-gs-light border border-gs-gray/30 rounded-lg pl-10 pr-3 py-2.5 text-gs-navy placeholder-gs-gray/60 focus:outline-none focus:border-gs-navy focus:bg-white transition-all font-mono text-sm"
+                  />
+                </div>
+              </div>
+              {error && (
+                <div className="text-red-700 text-sm flex items-center gap-2 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+                  <Icon name="AlertCircle" size={14} />
+                  {error}
+                </div>
+              )}
+              <button
+                type="submit"
+                className="w-full py-3 text-white font-bold rounded-lg transition-all duration-200 flex items-center justify-center gap-2 hover:scale-[1.01] active:scale-[0.99] shadow-md hover:shadow-lg"
+                style={{ background: "linear-gradient(135deg, #6B7C90 0%, #1A2D4D 100%)" }}
+              >
+                <Icon name="LogIn" size={18} />
+                ВОЙТИ В КАБИНЕТ
+              </button>
+            </form>
+
+            <div className="mt-5 pt-4 border-t border-gs-light text-center">
+              <p className="text-gs-gray text-xs">Забыли ID или пароль? Обратитесь к администратору проекта</p>
+            </div>
           </div>
         </div>
 
         {/* Right - quick login (роли) */}
         <div className="w-full">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="mb-5 border-l-4 border-gs-yellow pl-3">
+            <div className="text-white text-xs uppercase tracking-[0.2em] font-bold">Выберите роль</div>
+            <div className="text-gs-yellow text-[11px] mt-1">ID подставится автоматически</div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             {roles.map((r) => (
               <button
                 key={r.id}
                 onClick={() => selectRole(r)}
-                className="role-card relative bg-[#111111]/90 backdrop-blur rounded-2xl p-5 text-left transition-all duration-300 hover:-translate-y-1 group overflow-hidden"
+                className="role-card group relative bg-white rounded-2xl p-4 text-left transition-all duration-300 hover:-translate-y-1 overflow-hidden shadow-md hover:shadow-xl"
               >
-                <div className="relative z-10 flex items-center gap-3 mb-3">
+                {/* Жёлтая полоска сверху-слева — фирменный акцент */}
+                <div className="absolute top-0 left-0 w-12 h-1 bg-gs-yellow group-hover:w-full transition-all duration-500" />
+
+                <div className="flex items-center gap-3 mb-2">
                   <div
-                    className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 border"
-                    style={{ background: r.color + "20", borderColor: r.color + "40" }}
+                    className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
+                    style={{ background: "linear-gradient(135deg, #6B7C90 0%, #1A2D4D 100%)" }}
                   >
-                    <Icon name={r.icon} size={20} style={{ color: r.color }} />
+                    <Icon name={r.icon} size={20} flat className="text-white" />
                   </div>
-                  <div className="min-w-0">
-                    <div className="text-white text-base font-semibold truncate">{r.name}</div>
-                    <div className="text-gray-500 text-xs font-mono truncate">{r.loginId}</div>
+                  <div className="min-w-0 flex-1">
+                    <div className="text-gs-navy text-sm font-bold truncate leading-tight">{r.name}</div>
+                    <div className="text-gs-gray text-[10px] font-mono truncate mt-0.5">{r.loginId}</div>
                   </div>
                 </div>
-                <div className="relative z-10 text-gray-400 text-xs leading-snug line-clamp-2">{r.description}</div>
+                <div className="text-gs-gray text-[11px] leading-snug line-clamp-2">{r.description}</div>
               </button>
             ))}
           </div>
 
-          <style>{`
-            .role-card {
-              border: 1px solid rgba(255,255,255,0.08);
-            }
-            .role-card::before {
-              content: "";
-              position: absolute;
-              inset: 0;
-              border-radius: 1rem;
-              padding: 1.5px;
-              background: conic-gradient(
-                from var(--gs-angle, 0deg),
-                rgba(59, 130, 246, 0.05) 0%,
-                #60a5fa 25%,
-                #93c5fd 50%,
-                #3b82f6 75%,
-                rgba(59, 130, 246, 0.05) 100%
-              );
-              -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-              mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-              -webkit-mask-composite: xor;
-              mask-composite: exclude;
-              animation: borderRotate 5s linear infinite;
-              opacity: 0.6;
-              transition: opacity 0.3s ease;
-              pointer-events: none;
-            }
-            .role-card:hover::before {
-              opacity: 1;
-            }
-            .role-card:hover {
-              box-shadow:
-                0 0 24px rgba(59, 130, 246, 0.35),
-                0 0 48px rgba(30, 58, 138, 0.25);
-            }
-          `}</style>
-
-          {/* Слоган под карточками ролей */}
-          <div className="mt-10 text-center">
-            <div className="neon-slogan font-oswald text-2xl md:text-3xl tracking-[0.25em] uppercase leading-relaxed">
+          {/* Слоган под карточками ролей — в фирменных цветах */}
+          <div className="mt-10 text-center relative">
+            {/* Декоративная градиентная линия */}
+            <div
+              className="h-1 w-32 mx-auto mb-5 rounded-full"
+              style={{ background: "linear-gradient(90deg, #FCDD2B 0%, #F77D00 100%)" }}
+            />
+            <div className="neon-slogan font-inter text-xl md:text-2xl tracking-[0.25em] uppercase leading-relaxed">
               <span className="neon-word">Качество</span>{" "}
               <span className="neon-word">доступное</span>{" "}
               <span className="neon-word">каждому</span>
