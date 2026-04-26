@@ -61,60 +61,56 @@ export default function RoleHome({ role }: Props) {
   const stats = roleStats[role.id] || [];
 
   return (
-    <div className="animate-fade-in space-y-6">
-      {/* Hero greeting */}
+    <div className="animate-fade-in space-y-5 max-w-full">
+      {/* Hero greeting — белая карточка по брендбуку */}
       <div
-        className="relative rounded-2xl overflow-hidden p-6"
-        style={{
-          background: `linear-gradient(135deg, ${role.color}25 0%, transparent 60%), #161616`,
-          borderLeft: `3px solid ${role.color}`,
-        }}
+        className="relative rounded-2xl overflow-hidden p-5 bg-white/90 backdrop-blur-md border border-white/20 shadow-lg"
+        style={{ borderLeft: `4px solid ${role.color}` }}
       >
-        <div className="flex items-start justify-between gap-4 flex-wrap">
-          <div>
-            <div className="text-gray-500 text-xs uppercase tracking-widest">{role.fullName}</div>
-            <div className="font-oswald text-white text-2xl font-bold tracking-wide mt-1">
+        <div className="flex items-center justify-between gap-4 flex-wrap">
+          <div className="min-w-0 flex-1">
+            <div className="text-gs-gray text-[10px] uppercase tracking-[0.2em] font-semibold">{role.fullName}</div>
+            <div className="font-inter text-gs-navy text-2xl font-extrabold tracking-tight mt-1">
               Здравствуйте, {role.name.split(" ")[0]}!
             </div>
-            <div className="text-gray-400 text-sm mt-1">{role.description}</div>
+            <div className="text-gs-gray text-sm mt-1">{role.description}</div>
           </div>
-          <div
-            className="w-14 h-14 rounded-xl flex items-center justify-center shrink-0"
-            style={{ background: role.color + "20" }}
-          >
-            <Icon name={role.icon} size={28} style={{ color: role.color }} />
-          </div>
+          <Icon name={role.icon} size={32} />
         </div>
       </div>
 
       {/* Stages timeline — common to all roles */}
       <StagesTimeline />
 
-      {/* Role-specific KPI */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* Role-specific KPI — единая сетка, прозрачные карточки */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         {stats.map((s, i) => (
           <div
             key={i}
-            className="bg-build-card border border-build-border rounded-xl p-5 hover:border-build-orange/30 transition-all duration-300 hover:scale-[1.02]"
+            className="role-card relative rounded-xl p-4 transition-all duration-300 hover:-translate-y-0.5 shadow-md"
           >
-            <Icon name={s.icon} size={20} className="text-build-orange mb-3" />
-            <div className="font-oswald text-white text-2xl font-bold">{s.value}</div>
-            <div className="text-gray-400 text-xs mt-1">{s.label}</div>
-            <div className="text-gray-600 text-[11px] mt-0.5">{s.sub}</div>
+            <div className="flex items-start justify-between gap-2 mb-2">
+              <Icon name={s.icon} size={20} />
+            </div>
+            <div className="font-inter text-gs-navy text-xl font-extrabold leading-tight">{s.value}</div>
+            <div className="text-gs-gray text-[11px] mt-1 font-semibold">{s.label}</div>
+            <div className="text-gs-gray/70 text-[10px] mt-0.5">{s.sub}</div>
           </div>
         ))}
       </div>
 
-      {/* Role features list */}
-      <div className="bg-build-card rounded-xl border border-build-border p-5">
-        <div className="font-oswald text-white font-semibold tracking-wide mb-4">Доступные функции</div>
+      {/* Role features list — белая карточка */}
+      <div className="role-card relative bg-white/85 rounded-xl p-5 shadow-md">
+        <div className="border-l-4 border-gs-yellow pl-3 mb-4">
+          <div className="font-inter text-gs-navy text-base font-extrabold uppercase tracking-wider">Доступные функции</div>
+        </div>
         <div className="grid sm:grid-cols-2 gap-2">
           {role.features.map((f, i) => (
-            <div key={i} className="flex items-center gap-3 px-3 py-2 rounded-lg bg-white/3 hover:bg-white/5 transition-colors">
-              <div className="w-6 h-6 rounded-full bg-build-orange/15 flex items-center justify-center shrink-0">
-                <Icon name="Check" size={12} className="text-build-orange" />
+            <div key={i} className="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-gs-light hover:bg-gs-light/70 transition-colors">
+              <div className="w-5 h-5 rounded-full bg-gs-yellow flex items-center justify-center shrink-0">
+                <Icon name="Check" size={11} flat className="text-gs-navy" />
               </div>
-              <span className="text-gray-300 text-sm">{f}</span>
+              <span className="text-gs-navy text-sm font-medium truncate">{f}</span>
             </div>
           ))}
         </div>

@@ -191,9 +191,6 @@ export default function LoginBackground() {
           50% { transform: scale(1.06); }
         }
         .loader-ring {
-          position: absolute;
-          width: 320px;
-          height: 320px;
           border-radius: 50%;
           border: 2px solid transparent;
           border-top-color: #FCDD2B;
@@ -202,8 +199,6 @@ export default function LoginBackground() {
           box-shadow: 0 0 30px rgba(252,221,43,0.5);
         }
         .loader-ring.r2 {
-          width: 380px;
-          height: 380px;
           border-top-color: #60a5fa;
           border-left-color: #93c5fd;
           animation-duration: 2s;
@@ -214,7 +209,6 @@ export default function LoginBackground() {
           to { transform: rotate(360deg); }
         }
         .loader-text {
-          margin-top: 220px;
           color: #fff;
           font-family: 'Inter', sans-serif;
           font-weight: 700;
