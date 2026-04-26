@@ -499,10 +499,11 @@
     background: conic-gradient(
       from var(--gs-angle),
       transparent 0%,
-      #3b82f6 15%,
-      #93c5fd 30%,
-      #1e3a8a 45%,
-      transparent 60%
+      transparent 72%,
+      #60a5fa 82%,
+      #93c5fd 90%,
+      #3b82f6 96%,
+      transparent 100%
     );
     -webkit-mask:
       linear-gradient(#000 0 0) content-box,
@@ -545,11 +546,11 @@
     background: conic-gradient(
       from var(--gs-angle),
       transparent 0%,
-      #3b82f6 12%,
-      #93c5fd 25%,
-      #60a5fa 38%,
-      #1e3a8a 50%,
-      transparent 70%
+      transparent 72%,
+      #60a5fa 82%,
+      #93c5fd 90%,
+      #3b82f6 96%,
+      transparent 100%
     );
     -webkit-mask:
       linear-gradient(#000 0 0) content-box,
@@ -561,7 +562,7 @@
     mask-composite: exclude;
     opacity: 0;
     transition: opacity 0.4s ease;
-    animation: borderRotate 4s linear infinite;
+    animation: borderRotate 3s linear infinite;
     pointer-events: none;
     z-index: 0;
   }
