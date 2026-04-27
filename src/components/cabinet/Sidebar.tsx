@@ -65,6 +65,16 @@ export default function Sidebar({ active, setActive, sidebarOpen, setSidebarOpen
             >
               <Icon name={item.icon} size={16} flat className="shrink-0" />
               <span className="flex-1 text-left truncate">{item.label}</span>
+              <span
+                className={`font-mono text-[9px] tracking-wider px-1.5 py-0.5 rounded ${
+                  active === item.id
+                    ? "bg-gs-yellow/20 text-gs-yellow"
+                    : "bg-white/5 text-white/40"
+                }`}
+                title={`Код раздела для задач: ${item.code}`}
+              >
+                {item.code}
+              </span>
               {item.badge && (
                 <span className="bg-gs-yellow text-gs-navy text-[9px] font-bold px-1.5 py-0.5 rounded-full min-w-[16px] text-center">
                   {item.badge}

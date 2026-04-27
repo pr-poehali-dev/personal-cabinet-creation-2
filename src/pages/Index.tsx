@@ -7,6 +7,7 @@ import Login from "@/components/cabinet/Login";
 import RoleHome from "@/components/cabinet/RoleHome";
 import CreateProjectModal from "@/components/cabinet/CreateProjectModal";
 import VersionBadge from "@/components/cabinet/VersionBadge";
+import NavMapModal from "@/components/cabinet/NavMapModal";
 import AccessManagement from "@/components/cabinet/AccessManagement";
 import { navItems, Section } from "@/components/cabinet/constants";
 import { Role } from "@/components/cabinet/roles";
@@ -23,7 +24,9 @@ export default function Index() {
 
   // Фильтруем активный раздел: если у роли нет доступа — переключаем на dashboard
   const allowed = role.sections.includes(active) ? active : "dashboard";
-  const currentLabel = navItems.find((n) => n.id === allowed)?.label ?? "Главная";
+  const currentNav = navItems.find((n) => n.id === allowed);
+  const currentLabel = currentNav?.label ?? "Главная";
+  const currentCode = currentNav?.code ?? "D1";
   const canCreateProject = role.id === "gip";
 
   return (
@@ -59,7 +62,15 @@ export default function Index() {
           </button>
 
           <div className="flex-1 min-w-0 border-l-4 border-gs-yellow pl-3">
-            <h1 className="font-inter text-white text-lg font-extrabold tracking-tight leading-none truncate">{currentLabel}</h1>
+            <div className="flex items-center gap-2">
+              <h1 className="font-inter text-white text-lg font-extrabold tracking-tight leading-none truncate">{currentLabel}</h1>
+              <span
+                className="font-mono text-[10px] font-bold bg-gs-yellow/20 text-gs-yellow px-1.5 py-0.5 rounded shrink-0"
+                title="Код раздела для постановки задач"
+              >
+                {currentCode}
+              </span>
+            </div>
             <p className="text-white/60 text-[11px] mt-1 truncate">
               {role.fullName} · ID: <span className="font-mono text-gs-yellow">{role.loginId}</span>
             </p>
@@ -99,6 +110,7 @@ export default function Index() {
       </div>
 
       <CreateProjectModal open={createOpen} onClose={() => setCreateOpen(false)} />
+      <NavMapModal />
       <VersionBadge />
     </div>
   );

@@ -9,16 +9,124 @@ export type Section =
   | "analytics"
   | "access";
 
-export const navItems: { id: Section; label: string; icon: string; badge?: number }[] = [
-  { id: "dashboard", label: "Главная", icon: "LayoutDashboard" },
-  { id: "projects", label: "Проекты", icon: "HardHat", badge: 5 },
-  { id: "tasks", label: "Задачи", icon: "ClipboardList", badge: 12 },
-  { id: "team", label: "Команда", icon: "Users" },
-  { id: "finances", label: "Финансы", icon: "Wallet" },
-  { id: "documents", label: "Документы", icon: "FolderOpen" },
-  { id: "calendar", label: "Календарь", icon: "Calendar" },
-  { id: "analytics", label: "Аналитика", icon: "BarChart3" },
-  { id: "access", label: "Доступы", icon: "KeyRound" },
+export const navItems: { id: Section; label: string; icon: string; badge?: number; code: string }[] = [
+  { id: "dashboard", label: "Главная", icon: "LayoutDashboard", code: "D1" },
+  { id: "projects", label: "Проекты", icon: "HardHat", badge: 5, code: "D2" },
+  { id: "tasks", label: "Задачи", icon: "ClipboardList", badge: 12, code: "D3" },
+  { id: "team", label: "Команда", icon: "Users", code: "D4" },
+  { id: "finances", label: "Финансы", icon: "Wallet", code: "D5" },
+  { id: "documents", label: "Документы", icon: "FolderOpen", code: "D6" },
+  { id: "calendar", label: "Календарь", icon: "Calendar", code: "D7" },
+  { id: "analytics", label: "Аналитика", icon: "BarChart3", code: "D8" },
+  { id: "access", label: "Доступы", icon: "KeyRound", code: "D9" },
+];
+
+/**
+ * НАВИГАЦИОННАЯ КАРТА КАБИНЕТА
+ * Используй эти коды чтобы быстро ставить задачи Юре.
+ * Пример: "Поправь D2.2 — таблицу сводки по объектам"
+ */
+export const navMap = [
+  {
+    code: "D1",
+    name: "Главная",
+    blocks: [
+      { code: "D1.1", name: "Hero-баннер (приветствие + % выполнения плана)" },
+      { code: "D1.2", name: "KPI-плитки (Проекты / Задачи / Сотрудники / Выручка)" },
+      { code: "D1.3", name: "Превью «Проекты» (3 строки)" },
+      { code: "D1.4", name: "Превью «Задачи» (5 строк)" },
+    ],
+  },
+  {
+    code: "D2",
+    name: "Проекты",
+    blocks: [
+      { code: "D2.1", name: "Сетка карточек проектов" },
+      { code: "D2.2", name: "Таблица «Сводка по объектам»" },
+    ],
+  },
+  {
+    code: "D3",
+    name: "Задачи",
+    blocks: [
+      { code: "D3.1", name: "KPI-метрики (Всего / Выполнено / В работе)" },
+      { code: "D3.2", name: "Фильтры по приоритету" },
+      { code: "D3.3", name: "Список задач с чекбоксами" },
+    ],
+  },
+  {
+    code: "D4",
+    name: "Команда",
+    blocks: [
+      { code: "D4.1", name: "Сетка карточек сотрудников" },
+      { code: "D4.2", name: "Форма приглашения новых сотрудников" },
+    ],
+  },
+  {
+    code: "D5",
+    name: "Финансы",
+    blocks: [
+      { code: "D5.1", name: "KPI-плитки (Доходы / Расходы / Прибыль / Дебиторка)" },
+      { code: "D5.2", name: "Таблица «Последние операции»" },
+      { code: "D5.3", name: "График доходов/расходов по месяцам" },
+    ],
+  },
+  {
+    code: "D6",
+    name: "Документы",
+    blocks: [
+      { code: "D6.1", name: "Поиск + фильтр" },
+      { code: "D6.2", name: "Таблица документов" },
+      { code: "D6.3", name: "Кнопки загрузки/скачивания/удаления" },
+    ],
+  },
+  {
+    code: "D7",
+    name: "Календарь",
+    blocks: [
+      { code: "D7.1", name: "Шапка с переключателем месяцев" },
+      { code: "D7.2", name: "Сетка дней с событиями" },
+      { code: "D7.3", name: "Список ближайших событий" },
+    ],
+  },
+  {
+    code: "D8",
+    name: "Аналитика",
+    blocks: [
+      { code: "D8.1", name: "KPI-метрики (Объекты / План / Рентабельность / Сотрудники)" },
+      { code: "D8.2", name: "Прогресс по объектам (progress bars)" },
+      { code: "D8.3", name: "Финансовая аналитика (Выручка / Расходы / Прибыль)" },
+      { code: "D8.4", name: "Мини-KPI (ROI / Маржа / Оборот)" },
+    ],
+  },
+  {
+    code: "D9",
+    name: "Доступы",
+    blocks: [
+      { code: "D9.1", name: "Таблица управления доступом" },
+      { code: "D9.2", name: "Кнопки регенерации пароля" },
+      { code: "D9.3", name: "Экспорт в PDF" },
+    ],
+  },
+  {
+    code: "L",
+    name: "Логин-страница",
+    blocks: [
+      { code: "L1", name: "Орбиты с ролями + центральный логотип" },
+      { code: "L2", name: "Форма входа (после клика по роли)" },
+      { code: "L3", name: "Анимация загрузки кабинета (кольца + логотип)" },
+    ],
+  },
+  {
+    code: "S",
+    name: "Общие элементы",
+    blocks: [
+      { code: "S1", name: "Шапка кабинета (логотип, поиск, профиль)" },
+      { code: "S2", name: "Сайдбар (меню слева)" },
+      { code: "S3", name: "Бейдж версии (правый нижний угол)" },
+      { code: "S4", name: "Фон / частицы / орбиты" },
+    ],
+  },
 ];
 
 export const projects = [
