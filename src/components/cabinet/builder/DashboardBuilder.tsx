@@ -16,14 +16,25 @@ interface Props {
   roleId: string;
 }
 
-const STORAGE_KEY = (roleId: string) => `gs_dashboard_${roleId}_v2`;
+const STORAGE_KEY = (roleId: string) => `gs_dashboard_${roleId}_v3`;
 
 export default function DashboardBuilder({ roleId }: Props) {
+  const canUpload = roleId === "gip";
   const [editMode, setEditMode] = useState(false);
   const [widgets, setWidgets] = useState<WidgetData[]>([]);
   const [libOpen, setLibOpen] = useState(false);
   const [editing, setEditing] = useState<WidgetData | null>(null);
   const [width, setWidth] = useState(1200);
+
+  const handleConfigChange = (id: string, patch: Record<string, unknown>) => {
+    setWidgets((prev) =>
+      prev.map((w) =>
+        w.i === id
+          ? { ...w, config: { ...(w.config ?? {}), ...patch } }
+          : w
+      )
+    );
+  };
 
   // Загрузка раскладки
   useEffect(() => {
@@ -213,7 +224,11 @@ export default function DashboardBuilder({ roleId }: Props) {
                     </div>
                   )}
                   <div className="flex-1 p-3 overflow-hidden">
-                    <WidgetRenderer widget={w} />
+                    <WidgetRenderer
+                      widget={w}
+                      canUpload={canUpload}
+                      onConfigChange={handleConfigChange}
+                    />
                   </div>
                 </div>
               </div>

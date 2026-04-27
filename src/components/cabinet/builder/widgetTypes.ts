@@ -10,6 +10,8 @@ export type WidgetType =
   | "weather"
   | "iframe"
   | "house-build"
+  | "house-photo"
+  | "style-generator"
   | "payment-left"
   | "deadline"
   | "stages-line";
@@ -186,6 +188,28 @@ export const WIDGET_LIBRARY: WidgetMeta[] = [
     defaultConfig: { currentStage: 5 },
   },
   {
+    type: "house-photo",
+    name: "Фото дома",
+    description: "Реальное фото со стройки — загружает руководитель проекта",
+    icon: "Camera",
+    color: "#1162FF",
+    defaultW: 6,
+    defaultH: 7,
+    defaultTitle: "Фото со стройки",
+    defaultConfig: { photoUrl: "", uploadedAt: "" },
+  },
+  {
+    type: "style-generator",
+    name: "AI-стиль отделки",
+    description: "Нейросеть генерирует варианты отделки дома",
+    icon: "Sparkles",
+    color: "#8b5cf6",
+    defaultW: 12,
+    defaultH: 6,
+    defaultTitle: "Подбор стиля отделки (AI)",
+    defaultConfig: { defaultStyle: "modern" },
+  },
+  {
     type: "payment-left",
     name: "Осталось оплатить",
     description: "Сколько денег осталось внести по договору",
@@ -226,13 +250,13 @@ export const getWidgetMeta = (type: WidgetType) =>
 export const DEFAULT_LAYOUT: WidgetData[] = [
   {
     i: "house",
-    type: "house-build",
-    title: "Стройка дома",
+    type: "house-photo",
+    title: "Фото со стройки",
     x: 0,
     y: 0,
     w: 6,
     h: 7,
-    config: { currentStage: 5 },
+    config: { photoUrl: "", uploadedAt: "" },
   },
   {
     i: "pay",
@@ -277,5 +301,15 @@ export const DEFAULT_LAYOUT: WidgetData[] = [
     w: 12,
     h: 4,
     config: { currentStage: 5 },
+  },
+  {
+    i: "ai-style",
+    type: "style-generator",
+    title: "Подбор стиля отделки (AI)",
+    x: 0,
+    y: 11,
+    w: 12,
+    h: 6,
+    config: { defaultStyle: "modern" },
   },
 ];

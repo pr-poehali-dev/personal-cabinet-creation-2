@@ -2,15 +2,19 @@ import { useEffect, useState } from "react";
 import Icon from "@/components/ui/icon";
 import { WidgetData, getWidgetMeta } from "./widgetTypes";
 import HouseBuildWidget from "./widgets/HouseBuildWidget";
+import HousePhotoWidget from "./widgets/HousePhotoWidget";
+import StyleGeneratorWidget from "./widgets/StyleGeneratorWidget";
 import PaymentLeftWidget from "./widgets/PaymentLeftWidget";
 import DeadlineWidget from "./widgets/DeadlineWidget";
 import StagesLineWidget from "./widgets/StagesLineWidget";
 
 interface Props {
   widget: WidgetData;
+  canUpload?: boolean;
+  onConfigChange?: (id: string, patch: Record<string, unknown>) => void;
 }
 
-export default function WidgetRenderer({ widget }: Props) {
+export default function WidgetRenderer({ widget, canUpload, onConfigChange }: Props) {
   const meta = getWidgetMeta(widget.type);
   const cfg = (widget.config ?? {}) as Record<string, unknown>;
 
@@ -218,6 +222,30 @@ export default function WidgetRenderer({ widget }: Props) {
         <HouseBuildWidget
           title={widget.title}
           currentStage={Number(cfg.currentStage ?? 0)}
+        />
+      );
+
+    case "house-photo":
+      return (
+        <HousePhotoWidget
+          title={widget.title}
+          photoUrl={cfg.photoUrl ? String(cfg.photoUrl) : undefined}
+          uploadedAt={cfg.uploadedAt ? String(cfg.uploadedAt) : undefined}
+          canUpload={!!canUpload}
+          onSave={(next) =>
+            onConfigChange?.(widget.i, {
+              photoUrl: next.photoUrl,
+              uploadedAt: next.uploadedAt,
+            })
+          }
+        />
+      );
+
+    case "style-generator":
+      return (
+        <StyleGeneratorWidget
+          title={widget.title}
+          defaultStyle={cfg.defaultStyle ? String(cfg.defaultStyle) : undefined}
         />
       );
 
