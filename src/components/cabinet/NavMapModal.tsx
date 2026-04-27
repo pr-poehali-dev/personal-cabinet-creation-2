@@ -16,7 +16,7 @@ export default function NavMapModal() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-4 right-32 z-40 flex items-center gap-2 px-3 py-2 rounded-lg bg-gs-navy text-gs-yellow border border-gs-yellow/40 hover:bg-gs-yellow hover:text-gs-navy transition-all shadow-lg text-xs font-semibold"
+        className="fixed bottom-3 right-14 z-40 flex items-center gap-2 px-4 py-2 rounded-full bg-white text-sam-blue border border-sam-border hover:bg-sam-blue hover:text-white hover:border-sam-blue transition-all shadow-sm text-[12px] font-semibold"
         title="Карта навигации — коды разделов"
       >
         <Icon name="Map" size={14} flat />

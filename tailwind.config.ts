@@ -25,17 +25,28 @@ export default {
 				inter: ['Inter', 'sans-serif'],
 			},
 			colors: {
-				/* Брендбук ГлобалСтрой — основная палитра */
-				'gs-navy': '#1A2D4D',
-				'gs-navy-dark': '#0F1E33',
-				'gs-gray': '#6B7C90',
-				'gs-smoky-blue': '#3A4C67',
+				/* Стиль "Самолёт" — лёгкий, воздушный, современный */
+				'sam-blue': '#1162FF',
+				'sam-blue-dark': '#0A4DDB',
+				'sam-blue-soft': '#E8F0FF',
+				'sam-bg': '#F5F6F8',
+				'sam-surface': '#FFFFFF',
+				'sam-border': '#E6E9EE',
+				'sam-text': '#0E1A2B',
+				'sam-text-soft': '#6B7280',
+				'sam-pill': '#EEF1F5',
+
+				/* Совместимость со старым кодом — мягкие тона на светлом */
+				'gs-navy': '#0E1A2B',
+				'gs-navy-dark': '#0A1422',
+				'gs-gray': '#6B7280',
+				'gs-smoky-blue': '#1162FF',
 				'gs-smoky-green': '#2EB264',
-				'gs-yellow': '#FCDD2B',
-				'gs-orange': '#F77D00',
-				'gs-blue': '#1A2D4D',
-				'gs-accent': '#FCDD2B',
-				'gs-light': '#F5F7FC',
+				'gs-yellow': '#1162FF',
+				'gs-orange': '#0A4DDB',
+				'gs-blue': '#1162FF',
+				'gs-accent': '#1162FF',
+				'gs-light': '#F5F6F8',
 
 				/* Совместимость со старыми классами */
 				'build-orange': '#1A2D4D',

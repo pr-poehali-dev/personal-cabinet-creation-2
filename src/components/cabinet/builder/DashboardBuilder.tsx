@@ -116,10 +116,10 @@ export default function DashboardBuilder({ roleId }: Props) {
       {/* Toolbar */}
       <div className="flex items-center justify-between gap-3 flex-wrap">
         <div>
-          <h2 className="font-inter text-white text-2xl font-extrabold tracking-tight">
+          <h2 className="font-inter text-sam-text text-2xl font-bold tracking-tight">
             Мой рабочий стол
           </h2>
-          <p className="text-white/60 text-xs mt-1">
+          <p className="text-sam-text-soft text-[13px] mt-1">
             {editMode
               ? "Режим редактирования: тащи карточки за заголовок, тяни за угол чтобы изменить размер"
               : "Нажми «Настроить», чтобы перетаскивать модули и менять их размер"}
@@ -130,14 +130,14 @@ export default function DashboardBuilder({ roleId }: Props) {
             <>
               <button
                 onClick={() => setLibOpen(true)}
-                className="px-3 py-2 rounded-lg bg-gs-yellow text-gs-navy text-xs font-bold flex items-center gap-1.5 hover:bg-gs-orange hover:text-white transition-colors shadow-md"
+                className="px-4 py-2 rounded-full bg-sam-blue text-white text-[13px] font-semibold flex items-center gap-1.5 hover:bg-sam-blue-dark transition-colors shadow-sm shadow-sam-blue/20"
               >
                 <Icon name="Plus" size={14} flat />
                 Добавить модуль
               </button>
               <button
                 onClick={reset}
-                className="px-3 py-2 rounded-lg bg-white/10 text-white text-xs font-bold flex items-center gap-1.5 hover:bg-white/20 transition-colors"
+                className="px-4 py-2 rounded-full bg-sam-bg text-sam-text text-[13px] font-semibold flex items-center gap-1.5 hover:bg-sam-pill transition-colors"
               >
                 <Icon name="RotateCcw" size={14} flat />
                 Сброс
@@ -146,10 +146,10 @@ export default function DashboardBuilder({ roleId }: Props) {
           )}
           <button
             onClick={() => setEditMode((v) => !v)}
-            className={`px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all shadow-md ${
+            className={`px-4 py-2 rounded-full text-[13px] font-semibold flex items-center gap-1.5 transition-all ${
               editMode
-                ? "bg-green-500 text-white hover:bg-green-600"
-                : "bg-white text-gs-navy hover:bg-gs-yellow border border-gs-yellow"
+                ? "bg-emerald-500 text-white hover:bg-emerald-600 shadow-sm shadow-emerald-500/20"
+                : "bg-sam-blue-soft text-sam-blue hover:bg-sam-blue hover:text-white"
             }`}
           >
             <Icon name={editMode ? "Check" : "Settings2"} size={14} flat />
@@ -160,9 +160,9 @@ export default function DashboardBuilder({ roleId }: Props) {
 
       {/* Edit-mode hint */}
       {editMode && (
-        <div className="bg-gs-yellow/15 border border-gs-yellow/40 rounded-lg px-4 py-2.5 flex items-start gap-2">
-          <Icon name="Info" size={14} flat className="text-gs-yellow mt-0.5 shrink-0" />
-          <div className="text-white/80 text-xs leading-relaxed">
+        <div className="bg-sam-blue-soft border border-sam-blue/20 rounded-2xl px-4 py-3 flex items-start gap-2">
+          <Icon name="Info" size={14} flat className="text-sam-blue mt-0.5 shrink-0" />
+          <div className="text-sam-text text-[12px] leading-relaxed">
             Тащи модули за серый верхний край. Меняй размер за правый-нижний
             угол. Кликни на шестерёнку чтобы переименовать или изменить
             содержимое модуля.
@@ -173,12 +173,12 @@ export default function DashboardBuilder({ roleId }: Props) {
       {/* Grid */}
       <div
         id="builder-grid-wrap"
-        className={`relative rounded-xl ${
-          editMode ? "bg-white/5 border-2 border-dashed border-gs-yellow/40 p-2" : ""
+        className={`relative rounded-2xl ${
+          editMode ? "bg-sam-bg border-2 border-dashed border-sam-blue/30 p-2" : ""
         }`}
       >
         {widgets.length === 0 ? (
-          <div className="text-center py-20 text-white/50 text-sm">
+          <div className="text-center py-20 text-sam-text-soft text-sm">
             Пока пусто. Нажми «Настроить» → «Добавить модуль».
           </div>
         ) : (
@@ -196,16 +196,16 @@ export default function DashboardBuilder({ roleId }: Props) {
           >
             {widgets.map((w) => (
               <div key={w.i} className="group">
-                <div className="h-full bg-white rounded-xl shadow-md border border-gs-navy/10 overflow-hidden flex flex-col">
+                <div className="h-full bg-white rounded-2xl shadow-sm border border-sam-border overflow-hidden flex flex-col hover:shadow-md transition-shadow">
                   {editMode && (
-                    <div className="widget-drag-handle bg-gs-navy/10 cursor-move px-2 py-1 flex items-center justify-between shrink-0">
-                      <div className="flex items-center gap-1.5 text-gs-navy/60 text-[10px] font-bold uppercase tracking-wider">
+                    <div className="widget-drag-handle bg-sam-bg cursor-move px-2 py-1 flex items-center justify-between shrink-0 border-b border-sam-border">
+                      <div className="flex items-center gap-1.5 text-sam-text-soft text-[10px] font-semibold uppercase tracking-wider">
                         <Icon name="GripVertical" size={12} flat />
                         Перетащить
                       </div>
                       <button
                         onClick={() => setEditing(w)}
-                        className="text-gs-navy/60 hover:text-gs-navy"
+                        className="text-sam-text-soft hover:text-sam-blue transition-colors"
                         title="Настроить модуль"
                       >
                         <Icon name="Settings2" size={12} flat />

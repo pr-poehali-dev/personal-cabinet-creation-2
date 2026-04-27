@@ -1,6 +1,7 @@
 import Icon from "@/components/ui/icon";
 
 const CHANGELOG = [
+  { v: "v4.1", note: "Стиль «Самолёт»: белый воздушный интерфейс, синие pill-кнопки, тонкие тени, новая навигация" },
   { v: "v4.0", note: "Конструктор «Мой стол» (D0): drag&drop виджеты, библиотека из 10 модулей, сохранение раскладки по роли" },
   { v: "v3.8", note: "Карта навигации с кодами разделов (D1—D9, L, S) — кнопка «Карта» внизу справа" },
   { v: "v3.7", note: "Брендовая тема всего кабинета: белые карточки, фикс иконок-в-иконках, центр логотипа в загрузчике" },
@@ -38,28 +39,36 @@ export default function VersionBadge() {
     <div className="fixed bottom-3 right-3 z-50 group">
       {/* Раскрывающийся changelog */}
       <div
-        className="absolute bottom-full right-0 mb-2 w-64 bg-build-card/95 backdrop-blur-md border border-build-border rounded-xl p-3 shadow-2xl opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto"
+        className="absolute bottom-full right-0 mb-2 w-72 bg-white border border-sam-border rounded-2xl p-3 shadow-xl opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto"
       >
-        <div className="flex items-center gap-2 mb-2 pb-2 border-b border-build-border/60">
-          <Icon name="History" size={12} flat className="text-blue-400" />
-          <div className="font-oswald text-white text-xs font-semibold tracking-wider uppercase">История версий</div>
+        <div className="flex items-center gap-2 mb-2 pb-2 border-b border-sam-border">
+          <Icon name="History" size={12} flat className="text-sam-blue" />
+          <div className="font-inter text-sam-text text-xs font-semibold tracking-wider uppercase">
+            История версий
+          </div>
         </div>
         <div className="max-h-64 overflow-y-auto space-y-1.5 pr-1">
           {CHANGELOG.map((item, i) => (
             <div
               key={item.v}
-              className={`flex items-start gap-2 text-[11px] leading-tight py-1 px-1.5 rounded ${
-                i === 0 ? "bg-blue-500/10" : ""
+              className={`flex items-start gap-2 text-[11px] leading-tight py-1 px-1.5 rounded-lg ${
+                i === 0 ? "bg-sam-blue-soft" : ""
               }`}
             >
               <span
                 className={`font-mono font-semibold shrink-0 ${
-                  i === 0 ? "text-blue-300" : "text-gray-500"
+                  i === 0 ? "text-sam-blue" : "text-sam-text-soft"
                 }`}
               >
                 {item.v}
               </span>
-              <span className={i === 0 ? "text-gray-200" : "text-gray-400"}>{item.note}</span>
+              <span
+                className={
+                  i === 0 ? "text-sam-text" : "text-sam-text-soft"
+                }
+              >
+                {item.note}
+              </span>
             </div>
           ))}
         </div>
@@ -67,10 +76,10 @@ export default function VersionBadge() {
 
       {/* Маленький значок */}
       <button
-        className="w-7 h-7 rounded-full bg-build-card/80 backdrop-blur border border-build-border hover:border-blue-500/50 flex items-center justify-center transition-all duration-300 group-hover:scale-110 cursor-help"
+        className="w-8 h-8 rounded-full bg-white border border-sam-border hover:border-sam-blue/50 hover:bg-sam-blue-soft flex items-center justify-center transition-all duration-300 group-hover:scale-110 cursor-help shadow-sm"
         title="История версий"
       >
-        <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
       </button>
     </div>
   );

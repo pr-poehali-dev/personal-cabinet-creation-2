@@ -11,98 +11,134 @@ interface SidebarProps {
   onLogout: () => void;
 }
 
-export default function Sidebar({ active, setActive, sidebarOpen, setSidebarOpen, role, onLogout }: SidebarProps) {
+export default function Sidebar({
+  active,
+  setActive,
+  sidebarOpen,
+  setSidebarOpen,
+  role,
+  onLogout,
+}: SidebarProps) {
   const allowed = navItems.filter((n) => role.sections.includes(n.id));
 
   return (
     <>
       <aside
-        className={`fixed lg:static z-40 h-full w-60 backdrop-blur-md border-r border-white/10 flex flex-col transition-transform duration-300 shrink-0 ${
+        className={`fixed lg:static z-40 h-full w-64 bg-white border-r border-sam-border flex flex-col transition-transform duration-300 shrink-0 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
-        style={{
-          background: "linear-gradient(180deg, #1A2D4D 0%, #0F1E33 100%)",
-        }}
       >
-        {/* Logo — белый блок с лого */}
-        <div className="px-4 py-4 bg-white/95 shrink-0">
+        {/* Logo */}
+        <div className="px-5 py-5 shrink-0">
           <div className="flex items-center gap-2.5">
-            <img
-              src="https://cdn.poehali.dev/projects/13dba3bf-6323-4724-9f70-0455e15a1ea0/bucket/e86a33ff-bcc0-41ee-ad09-efce63f6f6e6.png"
-              alt="ГЛОБАЛСТ"
-              className="w-10 h-10 object-contain shrink-0"
-            />
+            <div className="w-9 h-9 rounded-xl bg-sam-blue flex items-center justify-center shrink-0">
+              <Icon name="Building2" size={18} flat className="text-white" />
+            </div>
             <div className="min-w-0">
-              <div className="font-inter text-[#0B1E3F] text-base font-extrabold tracking-tight leading-none truncate">ГЛОБАЛСТ</div>
-              <div className="text-[#1E3A8A] text-[8px] tracking-[0.18em] uppercase mt-1 font-semibold">Уральская СК</div>
+              <div className="font-inter text-sam-text text-[15px] font-bold tracking-tight leading-none truncate">
+                ГЛОБАЛСТ
+              </div>
+              <div className="text-sam-text-soft text-[10px] mt-1 leading-none">
+                кварталы для жизни
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Жёлтая разделительная полоса */}
-        <div className="h-0.5 bg-gs-yellow shrink-0" />
-
         {/* Role pill */}
-        <div className="px-4 py-2.5 border-b border-white/10 shrink-0">
-          <div className="flex items-center gap-2 text-[10px]">
-            <div className="w-1.5 h-1.5 rounded-full" style={{ background: role.color }} />
-            <span className="text-white/50 uppercase tracking-wider">Роль:</span>
-            <span className="text-white font-bold tracking-wide">{role.shortName}</span>
+        <div className="px-5 pb-3 shrink-0">
+          <div className="flex items-center gap-2 px-3 py-2 rounded-full bg-sam-pill">
+            <div
+              className="w-2 h-2 rounded-full shrink-0"
+              style={{ background: role.color }}
+            />
+            <span className="text-sam-text-soft text-[11px]">Роль:</span>
+            <span className="text-sam-text text-[11px] font-semibold">
+              {role.shortName}
+            </span>
           </div>
         </div>
 
         {/* Nav */}
-        <nav className="flex-1 py-3 overflow-y-auto">
-          {allowed.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => { setActive(item.id); setSidebarOpen(false); }}
-              className={`w-full flex items-center gap-2.5 px-4 py-2.5 text-[13px] font-medium transition-all duration-200 relative ${
-                active === item.id
-                  ? "text-gs-yellow bg-white/8 border-r-2 border-gs-yellow"
-                  : "text-white/65 hover:text-white hover:bg-white/5"
-              }`}
-            >
-              <Icon name={item.icon} size={16} flat className="shrink-0" />
-              <span className="flex-1 text-left truncate">{item.label}</span>
-              <span
-                className={`font-mono text-[9px] tracking-wider px-1.5 py-0.5 rounded ${
-                  active === item.id
-                    ? "bg-gs-yellow/20 text-gs-yellow"
-                    : "bg-white/5 text-white/40"
+        <nav className="flex-1 px-3 pb-3 overflow-y-auto space-y-1">
+          {allowed.map((item) => {
+            const isActive = active === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => {
+                  setActive(item.id);
+                  setSidebarOpen(false);
+                }}
+                className={`w-full flex items-center gap-2.5 px-3 py-2.5 text-[13px] font-medium rounded-xl transition-all duration-200 ${
+                  isActive
+                    ? "bg-sam-blue text-white shadow-sm shadow-sam-blue/20"
+                    : "text-sam-text hover:bg-sam-bg"
                 }`}
-                title={`Код раздела для задач: ${item.code}`}
               >
-                {item.code}
-              </span>
-              {item.badge && (
-                <span className="bg-gs-yellow text-gs-navy text-[9px] font-bold px-1.5 py-0.5 rounded-full min-w-[16px] text-center">
-                  {item.badge}
+                <Icon
+                  name={item.icon}
+                  size={17}
+                  flat
+                  className={`shrink-0 ${
+                    isActive ? "text-white" : "text-sam-text-soft"
+                  }`}
+                />
+                <span className="flex-1 text-left truncate">{item.label}</span>
+                <span
+                  className={`font-mono text-[9px] tracking-wider px-1.5 py-0.5 rounded ${
+                    isActive
+                      ? "bg-white/20 text-white"
+                      : "bg-sam-pill text-sam-text-soft"
+                  }`}
+                  title={`Код раздела для задач: ${item.code}`}
+                >
+                  {item.code}
                 </span>
-              )}
-            </button>
-          ))}
+                {item.badge && (
+                  <span
+                    className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center ${
+                      isActive
+                        ? "bg-white text-sam-blue"
+                        : "bg-sam-blue text-white"
+                    }`}
+                  >
+                    {item.badge}
+                  </span>
+                )}
+              </button>
+            );
+          })}
         </nav>
 
         {/* User */}
-        <div className="px-4 py-3 border-t border-white/10 shrink-0">
-          <div className="flex items-center gap-2.5 mb-2.5">
+        <div className="px-4 py-4 border-t border-sam-border shrink-0">
+          <div className="flex items-center gap-2.5 mb-3">
             <div
-              className="w-8 h-8 rounded-full border flex items-center justify-center shrink-0"
-              style={{ background: role.color + "20", borderColor: role.color + "60" }}
+              className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
+              style={{ background: role.color + "18" }}
             >
-              <span className="text-[10px] font-bold" style={{ color: role.color }}>{role.shortName}</span>
+              <span
+                className="text-[11px] font-bold"
+                style={{ color: role.color }}
+              >
+                {role.shortName}
+              </span>
             </div>
             <div className="flex-1 min-w-0">
-              <div className="text-white text-xs font-semibold truncate">{role.name}</div>
-              <div className="text-white/40 text-[10px] truncate font-mono">{role.loginId}</div>
+              <div className="text-sam-text text-[13px] font-semibold truncate">
+                {role.name}
+              </div>
+              <div className="text-sam-text-soft text-[11px] truncate font-mono">
+                {role.loginId}
+              </div>
             </div>
           </div>
           <button
             onClick={onLogout}
-            className="w-full flex items-center justify-center gap-2 py-1.5 rounded-md bg-white/5 hover:bg-gs-orange/20 text-white/60 hover:text-gs-yellow text-[11px] font-semibold transition-all"
+            className="w-full flex items-center justify-center gap-2 py-2 rounded-full bg-sam-bg hover:bg-sam-pill text-sam-text-soft hover:text-sam-blue text-[12px] font-semibold transition-all"
           >
-            <Icon name="LogOut" size={11} flat />
+            <Icon name="LogOut" size={12} flat />
             Выйти
           </button>
         </div>
@@ -110,7 +146,10 @@ export default function Sidebar({ active, setActive, sidebarOpen, setSidebarOpen
 
       {/* Overlay mobile */}
       {sidebarOpen && (
-        <div className="fixed inset-0 z-30 bg-black/60 lg:hidden" onClick={() => setSidebarOpen(false)} />
+        <div
+          className="fixed inset-0 z-30 bg-sam-text/30 backdrop-blur-sm lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
       )}
     </>
   );
