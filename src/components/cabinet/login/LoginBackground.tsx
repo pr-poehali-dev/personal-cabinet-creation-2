@@ -1,64 +1,4 @@
-import { useEffect, useRef } from "react";
-
 export default function LoginBackground() {
-  const particlesRef = useRef<HTMLDivElement>(null);
-
-  // Эффект притяжения частиц к курсору
-  useEffect(() => {
-    const container = particlesRef.current;
-    if (!container) return;
-
-    const dusts = Array.from(container.querySelectorAll<HTMLElement>(".dust"));
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let rafId = 0;
-
-    const onMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    };
-
-    const update = () => {
-      const ATTRACT_RADIUS = 220;
-      const STRENGTH = 0.35;
-
-      dusts.forEach((dust) => {
-        const rect = dust.getBoundingClientRect();
-        const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2;
-        const dx = mouseX - cx;
-        const dy = mouseY - cy;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist < ATTRACT_RADIUS && dist > 0) {
-          const force = (1 - dist / ATTRACT_RADIUS) * STRENGTH;
-          const moveX = dx * force;
-          const moveY = dy * force;
-          const scale = 1 + (1 - dist / ATTRACT_RADIUS) * 0.8;
-          dust.style.setProperty("--cursor-x", `${moveX}px`);
-          dust.style.setProperty("--cursor-y", `${moveY}px`);
-          dust.style.setProperty("--cursor-scale", `${scale}`);
-          dust.style.setProperty("--cursor-glow", `${(1 - dist / ATTRACT_RADIUS) * 16}px`);
-        } else {
-          dust.style.setProperty("--cursor-x", "0px");
-          dust.style.setProperty("--cursor-y", "0px");
-          dust.style.setProperty("--cursor-scale", "1");
-          dust.style.setProperty("--cursor-glow", "0px");
-        }
-      });
-
-      rafId = requestAnimationFrame(update);
-    };
-
-    window.addEventListener("mousemove", onMove);
-    rafId = requestAnimationFrame(update);
-
-    return () => {
-      window.removeEventListener("mousemove", onMove);
-      cancelAnimationFrame(rafId);
-    };
-  }, []);
-
   return (
     <>
       {/* Жёлтая декоративная полоса слева — брендовый акцент */}
@@ -76,8 +16,8 @@ export default function LoginBackground() {
           }}
         />
 
-        {/* Парящие частицы — звёздная пыль (с притяжением к курсору) */}
-        <div className="particles-orbit" ref={particlesRef}>
+        {/* Парящие частицы — звёздная пыль (свободный полёт) */}
+        <div className="particles-orbit">
           {Array.from({ length: 50 }).map((_, i) => (
             <span key={i} className={`dust dust-${(i % 10) + 1}`} />
           ))}
@@ -264,29 +204,24 @@ export default function LoginBackground() {
           border-radius: 50%;
           background: #93c5fd;
           opacity: 0;
-          --cursor-x: 0px;
-          --cursor-y: 0px;
-          --cursor-scale: 1;
-          --cursor-glow: 0px;
-          transform: translate(var(--cursor-x), var(--cursor-y)) scale(var(--cursor-scale));
-          transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), filter 0.3s ease;
-          animation: dustTwinkle 3s ease-in-out infinite;
-          will-change: transform, filter;
-          filter: drop-shadow(0 0 var(--cursor-glow) #93c5fd);
+          will-change: transform, opacity;
         }
-        @keyframes dustTwinkle {
-          0%, 100% { opacity: 0.3; }
-          50%      { opacity: 1; }
+        @keyframes dustFloat {
+          0%   { transform: translate(0, 0)        scale(0.8); opacity: 0.25; }
+          25%  { transform: translate(20px, -30px) scale(1.1); opacity: 0.9; }
+          50%  { transform: translate(-15px, -55px) scale(0.95); opacity: 0.55; }
+          75%  { transform: translate(-30px, 20px) scale(1.2); opacity: 1; }
+          100% { transform: translate(0, 0)        scale(0.8); opacity: 0.25; }
         }
 
-        /* Раскидаем частицы по сцене разными размерами */
+        /* Раскидаем частицы по сцене разными размерами и траекториями */
         ${Array.from({ length: 50 })
           .map((_, i) => {
             const left = Math.random() * 100;
             const top = Math.random() * 100;
             const size = Math.random() * 3 + 1.5;
-            const twinkleDelay = Math.random() * 3;
-            const twinkleDur = 2 + Math.random() * 3;
+            const delay = Math.random() * 6;
+            const duration = 8 + Math.random() * 10;
             const hue = Math.random() > 0.5 ? "#93c5fd" : Math.random() > 0.5 ? "#60a5fa" : "#FCDD2B";
             return `
               .particles-orbit > .dust:nth-child(${i + 1}) {
@@ -296,8 +231,7 @@ export default function LoginBackground() {
                 height: ${size}px;
                 background: ${hue};
                 box-shadow: 0 0 ${size * 2}px ${hue}, 0 0 ${size * 4}px ${hue}80;
-                animation-delay: -${twinkleDelay}s;
-                animation-duration: ${twinkleDur}s;
+                animation: dustFloat ${duration}s ease-in-out -${delay}s infinite;
               }
             `;
           })
