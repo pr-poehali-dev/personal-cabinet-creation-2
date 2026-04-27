@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import Icon from "@/components/ui/icon";
 import { WidgetData, getWidgetMeta } from "./widgetTypes";
+import HouseBuildWidget from "./widgets/HouseBuildWidget";
+import PaymentLeftWidget from "./widgets/PaymentLeftWidget";
+import DeadlineWidget from "./widgets/DeadlineWidget";
+import StagesLineWidget from "./widgets/StagesLineWidget";
 
 interface Props {
   widget: WidgetData;
@@ -207,6 +211,40 @@ export default function WidgetRenderer({ widget }: Props) {
             dangerouslySetInnerHTML={{ __html: String(cfg.html ?? "") }}
           />
         </div>
+      );
+
+    case "house-build":
+      return (
+        <HouseBuildWidget
+          title={widget.title}
+          currentStage={Number(cfg.currentStage ?? 0)}
+        />
+      );
+
+    case "payment-left":
+      return (
+        <PaymentLeftWidget
+          title={widget.title}
+          total={Number(cfg.total ?? 0)}
+          paid={Number(cfg.paid ?? 0)}
+          currency={String(cfg.currency ?? "₽")}
+        />
+      );
+
+    case "deadline":
+      return (
+        <DeadlineWidget
+          title={widget.title}
+          deadline={String(cfg.deadline ?? new Date().toISOString().slice(0, 10))}
+        />
+      );
+
+    case "stages-line":
+      return (
+        <StagesLineWidget
+          title={widget.title}
+          currentStage={Number(cfg.currentStage ?? 0)}
+        />
       );
 
     default:

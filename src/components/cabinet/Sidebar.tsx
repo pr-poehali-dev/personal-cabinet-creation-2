@@ -1,3 +1,4 @@
+import { useRef, useState, useEffect } from "react";
 import Icon from "@/components/ui/icon";
 import { navItems, Section } from "./constants";
 import { Role } from "./roles";
@@ -11,6 +12,9 @@ interface SidebarProps {
   onLogout: () => void;
 }
 
+const LOGO_URL =
+  "https://cdn.poehali.dev/projects/13dba3bf-6323-4724-9f70-0455e15a1ea0/files/344584dc-fd85-4234-adb3-94a895405b4a.jpg";
+
 export default function Sidebar({
   active,
   setActive,
@@ -20,6 +24,30 @@ export default function Sidebar({
   onLogout,
 }: SidebarProps) {
   const allowed = navItems.filter((n) => role.sections.includes(n.id));
+  const navRef = useRef<HTMLElement>(null);
+  const [hover, setHover] = useState<{ y: number; visible: boolean }>({
+    y: 0,
+    visible: false,
+  });
+
+  const handleMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const navRect = navRef.current?.getBoundingClientRect();
+    const btnRect = e.currentTarget.getBoundingClientRect();
+    if (!navRect) return;
+    setHover({
+      y: btnRect.top - navRect.top,
+      visible: true,
+    });
+  };
+
+  const handleLeave = () => {
+    setHover((h) => ({ ...h, visible: false }));
+  };
+
+  // Прячем подсветку при смене активного пункта
+  useEffect(() => {
+    setHover((h) => ({ ...h, visible: false }));
+  }, [active]);
 
   return (
     <>
@@ -31,9 +59,11 @@ export default function Sidebar({
         {/* Logo */}
         <div className="px-5 py-5 shrink-0">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-sam-blue flex items-center justify-center shrink-0">
-              <Icon name="Building2" size={18} flat className="text-white" />
-            </div>
+            <img
+              src={LOGO_URL}
+              alt="ГЛОБАЛСТ"
+              className="w-11 h-11 object-contain shrink-0"
+            />
             <div className="min-w-0">
               <div className="font-inter text-sam-text text-[15px] font-bold tracking-tight leading-none truncate">
                 ГЛОБАЛСТ
@@ -59,56 +89,65 @@ export default function Sidebar({
           </div>
         </div>
 
-        {/* Nav */}
-        <nav className="flex-1 px-3 pb-3 overflow-y-auto space-y-1">
-          {allowed.map((item) => {
-            const isActive = active === item.id;
-            return (
-              <button
-                key={item.id}
-                onClick={() => {
-                  setActive(item.id);
-                  setSidebarOpen(false);
-                }}
-                className={`w-full flex items-center gap-2.5 px-3 py-2.5 text-[13px] font-medium rounded-xl transition-all duration-200 ${
-                  isActive
-                    ? "bg-sam-blue text-white shadow-sm shadow-sam-blue/20"
-                    : "text-sam-text hover:bg-sam-bg"
-                }`}
-              >
-                <Icon
-                  name={item.icon}
-                  size={17}
-                  flat
-                  className={`shrink-0 ${
-                    isActive ? "text-white" : "text-sam-text-soft"
-                  }`}
-                />
-                <span className="flex-1 text-left truncate">{item.label}</span>
-                <span
-                  className={`font-mono text-[9px] tracking-wider px-1.5 py-0.5 rounded ${
+        {/* Nav: текст без иконок + плавный синий hover-фон, который следует за курсором */}
+        <nav
+          ref={navRef}
+          className="flex-1 px-3 pb-3 overflow-y-auto relative"
+          onMouseLeave={handleLeave}
+        >
+          {/* Плавающий синий hover-фон */}
+          <div
+            className="absolute left-3 right-3 h-10 rounded-xl bg-sam-blue-soft pointer-events-none transition-all duration-300 ease-out"
+            style={{
+              transform: `translateY(${hover.y}px)`,
+              opacity: hover.visible ? 1 : 0,
+            }}
+          />
+          <div className="relative space-y-0.5">
+            {allowed.map((item) => {
+              const isActive = active === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onMouseEnter={handleMove}
+                  onClick={() => {
+                    setActive(item.id);
+                    setSidebarOpen(false);
+                  }}
+                  className={`relative z-10 w-full flex items-center px-4 h-10 text-[13px] rounded-xl transition-colors duration-200 ${
                     isActive
-                      ? "bg-white/20 text-white"
-                      : "bg-sam-pill text-sam-text-soft"
+                      ? "bg-sam-blue text-white font-semibold shadow-sm shadow-sam-blue/20"
+                      : "text-sam-text hover:text-sam-blue font-medium"
                   }`}
-                  title={`Код раздела для задач: ${item.code}`}
                 >
-                  {item.code}
-                </span>
-                {item.badge && (
-                  <span
-                    className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center ${
-                      isActive
-                        ? "bg-white text-sam-blue"
-                        : "bg-sam-blue text-white"
-                    }`}
-                  >
-                    {item.badge}
+                  <span className="flex-1 text-left truncate">
+                    {item.label}
                   </span>
-                )}
-              </button>
-            );
-          })}
+                  <span
+                    className={`font-mono text-[9px] tracking-wider px-1.5 py-0.5 rounded ${
+                      isActive
+                        ? "bg-white/20 text-white"
+                        : "bg-sam-pill text-sam-text-soft"
+                    }`}
+                    title={`Код раздела: ${item.code}`}
+                  >
+                    {item.code}
+                  </span>
+                  {item.badge && (
+                    <span
+                      className={`ml-2 text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center ${
+                        isActive
+                          ? "bg-white text-sam-blue"
+                          : "bg-sam-blue text-white"
+                      }`}
+                    >
+                      {item.badge}
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
         </nav>
 
         {/* User */}
@@ -144,7 +183,6 @@ export default function Sidebar({
         </div>
       </aside>
 
-      {/* Overlay mobile */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 z-30 bg-sam-text/30 backdrop-blur-sm lg:hidden"

@@ -16,7 +16,7 @@ interface Props {
   roleId: string;
 }
 
-const STORAGE_KEY = (roleId: string) => `gs_dashboard_${roleId}_v1`;
+const STORAGE_KEY = (roleId: string) => `gs_dashboard_${roleId}_v2`;
 
 export default function DashboardBuilder({ roleId }: Props) {
   const [editMode, setEditMode] = useState(false);

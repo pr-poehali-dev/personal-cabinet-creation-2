@@ -8,7 +8,27 @@ export type WidgetType =
   | "shortcut"
   | "clock"
   | "weather"
-  | "iframe";
+  | "iframe"
+  | "house-build"
+  | "payment-left"
+  | "deadline"
+  | "stages-line";
+
+export const HOUSE_STAGES = [
+  "Фундамент",
+  "Канализация",
+  "Скважина",
+  "Возведение коробки",
+  "Устройство кровли",
+  "Устройство фасада",
+  "Монтаж окон",
+  "Сантехника / отопление",
+  "Электрика",
+  "Полусухая стяжка",
+  "Механизированная штукатурка",
+  "Вывоз мусора",
+  "Сдача дома",
+];
 
 export interface WidgetData {
   i: string;
@@ -154,6 +174,50 @@ export const WIDGET_LIBRARY: WidgetMeta[] = [
     defaultTitle: "Заметки команды",
     defaultConfig: { html: "Сюда можно вставить любой текст или HTML." },
   },
+  {
+    type: "house-build",
+    name: "Дом-конструктор",
+    description: "Интерактивный дом, который собирается по этапам",
+    icon: "Home",
+    color: "#1162FF",
+    defaultW: 6,
+    defaultH: 7,
+    defaultTitle: "Стройка дома",
+    defaultConfig: { currentStage: 5 },
+  },
+  {
+    type: "payment-left",
+    name: "Осталось оплатить",
+    description: "Сколько денег осталось внести по договору",
+    icon: "Wallet",
+    color: "#10b981",
+    defaultW: 3,
+    defaultH: 3,
+    defaultTitle: "К оплате",
+    defaultConfig: { total: 12500000, paid: 7800000, currency: "₽" },
+  },
+  {
+    type: "deadline",
+    name: "Срок до сдачи",
+    description: "Обратный отсчёт до конца стройки",
+    icon: "CalendarClock",
+    color: "#f59e0b",
+    defaultW: 3,
+    defaultH: 3,
+    defaultTitle: "До сдачи дома",
+    defaultConfig: { deadline: "2026-12-15" },
+  },
+  {
+    type: "stages-line",
+    name: "Линия этапов",
+    description: "Все 13 этапов стройки в виде линии",
+    icon: "GitCommitHorizontal",
+    color: "#8b5cf6",
+    defaultW: 12,
+    defaultH: 3,
+    defaultTitle: "Этапы строительства",
+    defaultConfig: { currentStage: 5 },
+  },
 ];
 
 export const getWidgetMeta = (type: WidgetType) =>
@@ -161,75 +225,57 @@ export const getWidgetMeta = (type: WidgetType) =>
 
 export const DEFAULT_LAYOUT: WidgetData[] = [
   {
-    i: "w1",
-    type: "kpi",
-    title: "Выручка",
+    i: "house",
+    type: "house-build",
+    title: "Стройка дома",
     x: 0,
     y: 0,
-    w: 3,
-    h: 3,
-    config: { value: "18.4 млн", sub: "за апрель", trend: "+12%" },
+    w: 6,
+    h: 7,
+    config: { currentStage: 5 },
   },
   {
-    i: "w2",
-    type: "kpi",
-    title: "Активные проекты",
-    x: 3,
-    y: 0,
-    w: 3,
-    h: 3,
-    config: { value: "4", sub: "из 6", trend: "+1" },
-  },
-  {
-    i: "w3",
-    type: "clock",
-    title: "Время",
+    i: "pay",
+    type: "payment-left",
+    title: "Осталось оплатить",
     x: 6,
     y: 0,
     w: 3,
     h: 3,
+    config: { total: 12500000, paid: 7800000, currency: "₽" },
   },
   {
-    i: "w4",
-    type: "weather",
-    title: "Екатеринбург",
+    i: "dead",
+    type: "deadline",
+    title: "До сдачи дома",
     x: 9,
     y: 0,
     w: 3,
     h: 3,
-    config: { temp: "+8°", desc: "Облачно" },
+    config: { deadline: "2026-12-15" },
   },
   {
-    i: "w5",
-    type: "progress",
-    title: "Прогресс по объектам",
-    x: 0,
-    y: 3,
-    w: 6,
-    h: 4,
-    config: {
-      items: [
-        { name: "ЖК «Горизонт»", value: 68, color: "#fcdd2b" },
-        { name: "ТЦ Север", value: 23, color: "#3b82f6" },
-        { name: "Офис «Технопарк»", value: 44, color: "#a855f7" },
-      ],
-    },
-  },
-  {
-    i: "w6",
-    type: "list",
-    title: "Мои задачи",
+    i: "stage-now",
+    type: "kpi",
+    title: "Текущий этап",
     x: 6,
     y: 3,
     w: 6,
     h: 4,
     config: {
-      items: [
-        { text: "Проверить смету ЖК", done: false },
-        { text: "Звонок поставщику", done: true },
-        { text: "Подписать договор ТЦ Север", done: false },
-        { text: "Совещание в 15:00", done: false },
-      ],
+      value: "5 из 13",
+      sub: "Устройство кровли",
+      trend: "На графике",
     },
+  },
+  {
+    i: "line",
+    type: "stages-line",
+    title: "Этапы строительства",
+    x: 0,
+    y: 7,
+    w: 12,
+    h: 4,
+    config: { currentStage: 5 },
   },
 ];
