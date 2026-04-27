@@ -9,21 +9,22 @@ import CreateProjectModal from "@/components/cabinet/CreateProjectModal";
 import VersionBadge from "@/components/cabinet/VersionBadge";
 import NavMapModal from "@/components/cabinet/NavMapModal";
 import AccessManagement from "@/components/cabinet/AccessManagement";
+import DashboardBuilder from "@/components/cabinet/builder/DashboardBuilder";
 import { navItems, Section } from "@/components/cabinet/constants";
 import { Role } from "@/components/cabinet/roles";
 
 export default function Index() {
   const [role, setRole] = useState<Role | null>(null);
-  const [active, setActive] = useState<Section>("dashboard");
+  const [active, setActive] = useState<Section>("workspace");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [createOpen, setCreateOpen] = useState(false);
 
   if (!role) {
-    return <Login onLogin={(r) => { setRole(r); setActive("dashboard"); }} />;
+    return <Login onLogin={(r) => { setRole(r); setActive("workspace"); }} />;
   }
 
-  // Фильтруем активный раздел: если у роли нет доступа — переключаем на dashboard
-  const allowed = role.sections.includes(active) ? active : "dashboard";
+  // Фильтруем активный раздел: если у роли нет доступа — переключаем на workspace
+  const allowed = role.sections.includes(active) ? active : (role.sections[0] ?? "dashboard");
   const currentNav = navItems.find((n) => n.id === allowed);
   const currentLabel = currentNav?.label ?? "Главная";
   const currentCode = currentNav?.code ?? "D1";
@@ -43,7 +44,7 @@ export default function Index() {
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
         role={role}
-        onLogout={() => { setRole(null); setActive("dashboard"); }}
+        onLogout={() => { setRole(null); setActive("workspace"); }}
       />
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden relative z-10">
@@ -95,7 +96,9 @@ export default function Index() {
 
         <main className="flex-1 overflow-y-auto overflow-x-hidden p-4 md:p-6 max-w-full">
           <div className="max-w-[1600px] mx-auto w-full">
-            {allowed === "dashboard" ? (
+            {allowed === "workspace" ? (
+              <DashboardBuilder roleId={role.id} />
+            ) : allowed === "dashboard" ? (
               <RoleHome role={role} />
             ) : allowed === "access" ? (
               <AccessManagement />

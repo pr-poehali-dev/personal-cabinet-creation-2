@@ -35,7 +35,7 @@ export const roles: Role[] = [
     icon: "HardHat",
     color: "#1E3A8A",
     description: "Полный доступ ко всем разделам, управление командой и бюджетом",
-    sections: ["dashboard", "projects", "tasks", "team", "finances", "documents", "calendar", "analytics", "access"],
+    sections: ["workspace", "dashboard", "projects", "tasks", "team", "finances", "documents", "calendar", "analytics", "access"],
     features: [
       "Создание и редактирование проектов",
       "Назначение задач команде",
@@ -55,7 +55,7 @@ export const roles: Role[] = [
     icon: "TrendingUp",
     color: "#FFB800",
     description: "Воронка клиентов, договоры и выручка по объектам",
-    sections: ["dashboard", "projects", "finances", "documents", "calendar", "analytics"],
+    sections: ["workspace", "dashboard", "projects", "finances", "documents", "calendar", "analytics"],
     features: [
       "Воронка продаж и сделки",
       "Договоры и КП",
@@ -73,7 +73,7 @@ export const roles: Role[] = [
     icon: "Package",
     color: "#22C55E",
     description: "Заявки на материалы, поставщики, склад и логистика",
-    sections: ["dashboard", "projects", "tasks", "documents", "calendar"],
+    sections: ["workspace", "dashboard", "projects", "tasks", "documents", "calendar"],
     features: [
       "Заявки на материалы",
       "База поставщиков",
@@ -91,7 +91,7 @@ export const roles: Role[] = [
     icon: "User",
     color: "#3B82F6",
     description: "Свой объект: прогресс, фотоотчёты, документы и оплаты",
-    sections: ["dashboard", "projects", "documents", "calendar"],
+    sections: ["workspace", "dashboard", "projects", "documents", "calendar"],
     features: [
       "Прогресс стройки в реальном времени",
       "Фото- и видеоотчёты",
@@ -109,7 +109,7 @@ export const roles: Role[] = [
     icon: "Handshake",
     color: "#8B5CF6",
     description: "Приведённые клиенты, статус сделок и комиссии",
-    sections: ["dashboard", "projects", "finances", "analytics"],
+    sections: ["workspace", "dashboard", "projects", "finances", "analytics"],
     features: [
       "Список приведённых клиентов",
       "Статус сделок",
@@ -127,7 +127,7 @@ export const roles: Role[] = [
     icon: "Wrench",
     color: "#EF4444",
     description: "Задачи на участке, фотоотчёты и акты КС-2/КС-3",
-    sections: ["dashboard", "tasks", "documents", "calendar"],
+    sections: ["workspace", "dashboard", "tasks", "documents", "calendar"],
     features: [
       "Задачи и чек-листы работ",
       "Загрузка фотоотчётов",
@@ -145,7 +145,7 @@ export const roles: Role[] = [
     icon: "ShieldCheck",
     color: "#06B6D4",
     description: "Журнал работ, акты скрытых работ и замечания по качеству",
-    sections: ["dashboard", "projects", "tasks", "documents", "calendar"],
+    sections: ["workspace", "dashboard", "projects", "tasks", "documents", "calendar"],
     features: [
       "Журнал производства работ",
       "Акты скрытых работ",
@@ -163,7 +163,7 @@ export const roles: Role[] = [
     icon: "Scale",
     color: "#A855F7",
     description: "Договоры, претензии, согласования и правовая защита проектов",
-    sections: ["dashboard", "projects", "documents", "calendar", "analytics"],
+    sections: ["workspace", "dashboard", "projects", "documents", "calendar", "analytics"],
     features: [
       "Реестр и проверка договоров",
       "Согласование с контрагентами",

@@ -2,6 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+/* === Конструктор рабочего стола (react-grid-layout) === */
+.react-grid-item.react-grid-placeholder {
+  background: rgba(252, 221, 43, 0.35) !important;
+  border: 2px dashed #fcdd2b !important;
+  border-radius: 12px !important;
+  opacity: 1 !important;
+}
+.react-grid-item > .react-resizable-handle {
+  background-image: none !important;
+}
+.react-grid-item > .react-resizable-handle::after {
+  content: "";
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid #1a2d4d;
+  border-bottom: 2px solid #1a2d4d;
+  opacity: 0.4;
+}
+.react-grid-item.react-draggable-dragging {
+  z-index: 10;
+  cursor: grabbing !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25) !important;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

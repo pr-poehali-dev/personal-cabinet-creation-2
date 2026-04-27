@@ -1,4 +1,5 @@
 export type Section =
+  | "workspace"
   | "dashboard"
   | "projects"
   | "tasks"
@@ -10,6 +11,7 @@ export type Section =
   | "access";
 
 export const navItems: { id: Section; label: string; icon: string; badge?: number; code: string }[] = [
+  { id: "workspace", label: "Мой стол", icon: "LayoutGrid", code: "D0" },
   { id: "dashboard", label: "Главная", icon: "LayoutDashboard", code: "D1" },
   { id: "projects", label: "Проекты", icon: "HardHat", badge: 5, code: "D2" },
   { id: "tasks", label: "Задачи", icon: "ClipboardList", badge: 12, code: "D3" },
@@ -27,6 +29,16 @@ export const navItems: { id: Section; label: string; icon: string; badge?: numbe
  * Пример: "Поправь D2.2 — таблицу сводки по объектам"
  */
 export const navMap = [
+  {
+    code: "D0",
+    name: "Мой стол (конструктор)",
+    blocks: [
+      { code: "D0.1", name: "Тулбар (кнопки «Настроить» / «Добавить» / «Сброс»)" },
+      { code: "D0.2", name: "Сетка с виджетами (drag&drop, resize)" },
+      { code: "D0.3", name: "Библиотека модулей (10 готовых типов)" },
+      { code: "D0.4", name: "Диалог настройки модуля (название, JSON-данные)" },
+    ],
+  },
   {
     code: "D1",
     name: "Главная",
